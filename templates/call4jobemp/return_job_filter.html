@@ -1,0 +1,71 @@
+{% load static %}
+{% if job %}
+<section class="text-gray-600 body-font"> 
+    <div id="job_count_div" class="flex items-center justify justify-between  md:px-24 px-12 lg:pt-0 pt-12 pb-12">
+        <h3>{{job_count}} -- <strong>jobs found</strong></h3>
+        {% comment %} <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent" id="cars">
+            <option value="" disabled selected hidden>Short by</option>
+            <option value="Relevance">Relevance</option>
+            <option value="Date">Date</option>
+        </select> {% endcomment %}
+    </div>
+    <div class="container px-5 mx-auto">
+        
+        <div class="flex flex-wrap -m-4" id="select_filter">           
+            {% for i in job %}
+                <div class="xl:w-1/3 md:w-1/2 p-4 cursor-pointer flex justify-center jobBox">
+                    <a href="./job detail.html">
+                        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col w-[25em] hover:shadow-md">
+                            <div class="flex items-center mb-3">
+                                <div
+                                    class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-purple-500 text-white flex-shrink-0">
+                                    <img class="rounded-full" src="./assets/images/seeksave logo.png" alt="">
+                                </div>
+                                <h2 class="text-gray-900 text-lg title-font font-medium">{{i.company_name}}</h2>
+                            </div>
+                            <div class="flex-col">
+                                <h2 class="text-[#035E7B] text-xl font-semibold">{{i.job_title}}</h2>
+                                <div class=" flex justify-between ites-center pt-4">
+                                    <div class="flex items-center">
+                                        <img class="w-4 h-4 mr-2" src="{% static 'call4jobemp/assets/images/location-icon.png' %}"
+                                            alt="">
+                                        <p class="leading-relaxed text-base">{{i.job_location|truncatechars:5}}</p>
+                                    </div>
+                                    <p class="leading-relaxed text-base">{{i.minimum_annual_salary}}LPA - {{i.maximum_annual_salary}}LPA</p>
+                                </div>
+                                <div class="flex items-center justify-between mt-3">
+                                    <a href="./job detail.html"
+                                        class="text-[#035E7B] inline-flex items-center">Know More
+                                        <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2"
+                                            viewBox="0 0 24 24">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    <p class="leading-relaxed text-xs">7 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}    
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="text-gray-600 body-font"> 
+    <div id="job_count_div" class="flex items-center justify justify-between  md:px-24 px-12 lg:pt-0 pt-12 pb-12">
+        <h3>0 -- <strong>jobs found</strong></h3>
+        {% comment %} <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent" id="cars">
+            <option value="" disabled selected hidden>Short by</option>
+            <option value="Relevance">Relevance</option>
+            <option value="Date">Date</option>
+        </select> {% endcomment %}
+    </div>
+    <div class="container px-5 mx-auto">
+        <div class="flex flex-wrap -m-4" id="select_filter">           
+            <h3>No job found </h3>    
+        </div>
+    </div>
+</section>
+{% endif %}

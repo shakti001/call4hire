@@ -1,0 +1,618 @@
+{% extends 'call4jobemp/base/base.html'%}
+{% load static %}
+
+{% block body %}
+<style>
+    .error{
+        color:red;
+        font-size:11px;
+        padding-bottom: 3px;
+        margin:0px 8px;
+        font-weight:300;
+    }
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+        position: relative;
+        background-color: #035e7b38;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10em 20px 4em 20px;
+    }
+
+    section .container {
+        position: relative;
+        width: 800px;
+        height:900px;
+        background: #fff;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    section .container .user {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    section .container .user .formBx {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        padding: 40px;
+        transition: 0.5s;
+        justify-content: center;
+        align-items: center;
+    }
+
+    section .container .user .formBx form h2 {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    section .container .user .formBx form .btn {
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        background: #f5f5f5;
+        color: #333;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        margin: 8px 8px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: 300;
+        cursor: pointer;
+    }
+
+    section .container .user .formBx form .field {
+        background: #ffffff;
+        cursor: context-menu;
+    }
+
+    section .container .user .formBx form .select {
+        width: 47%;
+    }
+
+    section .container .user .formBx form .input_container
+    {
+        position: relative;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: left;
+    }
+
+    section .container .user .formBx form .submit_btn {
+        max-width: 100px;
+        background: #035E7B;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: 0.5s;
+    }
+
+    section .container .user .formBx form .signup {
+        position: relative;
+        margin-top: 20px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #555;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    section .container .user .formBx form .signup a {
+        font-weight: 600;
+        text-decoration: none;
+        color: #035E7B;
+    }
+    @media (max-width: 991px) {        
+        section .container .imgBx {
+            display: none;
+        }
+
+        section .container .user .formBx {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        section .container {
+            height: 1200px;
+        }
+
+        section .container .user .formBx form .input {
+            width: 100%;
+        }
+
+        section .container .user .formBx form .select {
+            width: 100%;
+        }
+    }
+
+
+    /* toggle button css */
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px;
+        height: 20px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #9bc8d9;
+        outline: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border: 1px solid #cfcfcf;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+    }
+
+    input[type="checkbox"]:checked::before {
+        transform: translateX(100%);
+        background: #fff;
+    }
+
+    input[type="checkbox"]:checked {
+        background: #00ed64;
+    }
+
+    /* toggle button css ends */
+</style>
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+  <!--  header Start -->
+  {% include 'call4jobemp/base/header.html' %}
+  <!-- header end -->
+  
+  <section>
+    <div class="container flex items-center justify-center p-4 ">
+        <!-- signup box -->
+        <div class="employeFormContainer">
+                <form class=""  method="POST" id="SignForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text"  hidden  value="{{slug}}"    id="slug" >
+
+                    <h2  class="text-center heading">Create an account as Employee</h2>
+                        <div class="employementDetails">
+                            <div class="select btn field flex items-center ">
+                                <div id="checked_checkbox">
+                                    <input type="checkbox" checked onclick="select_employement()"    class="emp"  name="employed_checkbox"  id="employed_checkbox">
+                                </div>
+                                
+                                <span class="">Are you currently employed?</span>
+                            </div>
+                            <div class="flex designation">
+    
+                            <div class="flex align-center">
+                                <span class="">Enter Designation</span>
+
+                                <input class="btn" class="form-control" data-rule-required="true" name="designation" id="designation"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Designation'" placeholder="Enter your Designation" placeholder="Designation" />
+                            </div>
+                            </div>
+    
+                                    <div class="flex  input_container">
+                                            <span class="">Total Work Experienced</span>
+                                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn"
+                                            name="year" id="year"   data-rule-required="true" >
+                                                <option value="" disabled selected hidden>Select Year</option>
+                                                <option value="1">1 year</option>
+                                                <option value="2">2 year</option>
+                                                <option value="3">3 year</option>
+                                                <option value="4">4 year</option>
+                                                <option value="5">5 year</option>
+                                                <option value="6">6 year</option>
+                                                <option value="7">7 year</option>
+                                                <option value="8">8 year</option>
+                                                <option value="9">9 year</option>
+                                                <option value="10">10 year</option>
+                                                <option value="10+">10+ year</option>
+                                            </select>
+                                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn"
+                                            name="month" id="month"   data-rule-required="true">
+                                                <option value="" disabled selected hidden>Select Month</option>
+                                                <option value="1">1 month</option>
+                                                <option value="2">2 month</option>
+                                                <option value="3">3 month</option>
+                                                <option value="4">4 month</option>
+                                                <option value="5">5 month</option>
+                                                <option value="6">6 month</option>
+                                                <option value="7">7 month</option>
+                                                <option value="8">8 month</option>
+                                                <option value="9">9 month</option>
+                                                <option value="10">10 month</option>
+                                                <option value="11">11 month</option>
+                                            </select>
+                                     </div>                                   
+                            <!-- <div id="current_company_div"> -->
+                                <div class="flex flex-col select input_container"><input class="btn" data-rule-required="true" name="company" id="Current-company"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your company'" placeholder="Enter your company" type="text"  placeholder="Current Company Name" /></div>
+    
+                            <!-- </div> -->
+                            <!-- <div  id="previous_company_div" style="display:none;"> -->
+                                <div class="flex flex-col select input_container"><input style="display: none;" class="btn" data-rule-required="true" name="Previous-company" id="Pervious-company"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your company'" placeholder="Enter your Previous company" type="text"  placeholder="Previous Company Name" /></div>
+    
+                            <!-- </div> -->
+                            <div class="flex flex-col select input_container"><input class="btn" class="form-control" data-rule-required="true" name="designation" id="designation"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Designation'" placeholder="Enter your Designation" placeholder="Designation" /></div>
+    
+                                <div class="flex flex-col select input_container">
+                                    <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn" id="work_type">
+                                <option value="" disabled selected hidden>Work Type</option>
+                                <option value="fulltime">Full time </option>
+                                <option value="Parttime">Part time </option>
+                                <option value="Contract">contract</option>
+                            </select></div>
+                            
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" type="text" id="joining-date" placeholder="Joining date"
+                                onfocus="(this.type='date')"></div>
+    
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" type="text" style="display: none;" id="Leaving-date"  placeholder="Leaving-date"
+                            onfocus="(this.type='date')"></div>
+                                
+    
+    
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" type="text" id="salary" name="" placeholder="Current Salary" /></div>
+                            
+                            <div class="flex flex-col select input_container"><select data-rule-required="true" class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn" id="notice-period">
+                                <option value="" disabled selected hidden>Select notice period </option>
+                                <option value="15 days" default>15 days</option>
+                                <option value="1">1 Month</option>
+                                <option value="2">2 Month</option>
+                                <option value="3">2+ Month</option>
+                            </select></div>
+                            <div class="flex flex-col w-full input_container"><textarea data-rule-required="true" class="btn" name="key_skills" id="key_skills" cols="10" rows="5"
+                                placeholder="Add key skills"></textarea></div>
+                        </div>
+                        <button class="btn submit_btn" type="button" onclick="sendMessage()">continue</button>
+                    <p class="signup">
+                        Already have an account ?
+                       <button> <a href="./Employee login.html">Sign in.</a></button>
+                    </p>
+                </form>
+        </div>
+        <!-- //signup box ends... -->
+    </div>
+</section>
+        <!-- Hero Area End -->
+    <!-- ================ contact section start ================= -->
+    <!-- <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="contact-title">Register as employee</h2>
+                </div>
+                <div class="col-lg-12">
+                    <form class="form-contact contact_form" method="POST" id="SignForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <input type="text"  hidden  value="{{slug}}"    id="slug" >
+
+                            <div class="col-sm-6" >
+                                <label><B>Are you  currently employed?</B></label>
+                                <div class="form-group" >
+                                    <div class="d-flex">
+                                        <p>Yes</p>
+                                        <p class="ml-4">No</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="primary-switch">
+                                            <input type="checkbox" onclick="select_employement()"   value="yes" class="emp"  name="employed"  id="primary-switch" checked>
+                                            <label for="primary-switch"></label>
+                                        </div>
+                                        <div class="confirm-switch ml-4">
+                                            {% comment %} <input type="checkbox" onclick="select_employement('yes')" class="employed"  value="yes" name="employed"  id="primary-switch" checked> {% endcomment %}
+                                            <input type="checkbox" onclick="select_employement('no')"   value="no"  class="emp" name="employed"  id="confirm-switch">
+                                            <label for="confirm-switch"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Total Work Experienced</B></label>
+                                <div class="d-flex">
+                                    <div class="form-group" >
+                                        <select style="overflow:auto;" name="year" id="year"  class="form-select"  data-rule-required="true" >
+                                            <option selected disabled >Select Year </option>
+                                            <option value="1">1 Year</option>
+                                            <option value="2">2 Years</option>
+                                            <option value="3">3 Years</option>
+                                            <option value="4">4 Years</option>
+                                            <option value="5">5 Years</option>
+                                            <option value="6">6 Years</option>
+                                            <option value="7">7 Years</option>
+                                            <option value="8">8 Years</option>
+                                            <option value="9">9 Years</option>
+                                            <option value="10">10 Years</option>
+                                            <option value="10+">10+Years</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="month" id="month" class="form-select"  data-rule-required="true" >
+                                            <option selected disabled >Select month </option>
+                                            <option value="1">1 month</option>
+                                            <option value="2">2 months</option>
+                                            <option value="3">3 months</option>
+                                            <option value="4">4 months</option>
+                                            <option value="5">5 months</option>
+                                            <option value="6">6 months</option>
+                                            <option value="7">7 months</option>
+                                            <option value="8">8 months</option>
+                                            <option value="9">9 months</option>
+                                            <option value="10">10 months</option>
+                                            <option value="11">11 months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="current-company-name">
+                                <label><B>Current Company Name</B></label>
+                                <div class="form-group">
+                                    <input class="form-control" data-rule-required="true" name="company" id="Current-company"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your company'" placeholder="Enter your company">
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="pervious-company-name" style="display:none">
+                                <label><B>Pervious Company Name</B></label>
+                                <div class="form-group">
+                                    <input class="form-control" data-rule-required="true" name="company" id="Previous-company"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your company'" placeholder="Enter your company">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Designation</B></label>
+                                <div class="form-group">
+                                    <input class="form-control" data-rule-required="true" name="designation" id="designation"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Designation'" placeholder="Enter your Designation">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Add key skills</B></label>
+                                <div class="form-group">
+                                    <textarea class="form-control" data-rule-required="true" name="key_skills" id="key_skills"  type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your key skills'" placeholder="Enter your key skills"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Work type</B></label>
+                                <div class="form-group d-flex mt-20">
+                                    <div class="worktypediv">
+                                        <lebel><b> Full time </b></lebel>
+                                        <input class="ml-2" name="work_type"  onclick="select_work('fulltime')" value="fulltime" id="full_time_work_type" type="checkbox">
+                                    </div>
+                                   <div class="worktypediv ml-3">
+                                        <lebel><b> contract </b></lebel>
+                                    tanya info    <input class="ml-2" name="work_type" onclick="select_work('contract')"   value="contract"  id="contract_work_type" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-50">
+                                <label><B >Joining date</B></label>
+                                <label><B id="leaveing-date-lebel" style="display:none" class="ml-120">Leaving date</B></label>
+
+                                <div class="d-flex">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" data-rule-required="true" name="joining-date" id="joining-date"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your join date'" placeholder="Enter your join date">
+                                        </div>
+                                   
+                                        <p class="ml-3 mr-3 mt-1">To<p> 
+                                        <div class="form-group mt-1 ml-2" id="present">
+                                            <button disabled class="genric-btn primary circle" type="button">Present</button>
+                                        </div>
+                                        <div style="display:none" class="form-group ml-2" id="leaveing-date">
+                                            <input type="date" class="form-control" data-rule-required="true" name="leaveing-date" id="leaving-date"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your join date'" placeholder="Enter your join date">
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-50">
+                                <label><B >Current Salary</B></label>
+                                <div class="form-group">
+                                    <input type="te••••••••••xt" class="form-control" data-rule-required="true" name="salary" id="salary"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your current salary'" placeholder="Enter your current salary">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-50">
+                                <label><B >Notice Period</B></label>
+                                <div class="form-group">
+                                    <select name="noticeperiod" id="notice-period" class="form-select"  data-rule-required="true" >
+                                        <option selected disabled >Select notice period </option>
+                                        <option value="15 days">15 Days</option>
+
+                                        <option value="1 month">1 Month</option>
+                                        <option value="2 month">2 Months</option>
+                                        <option value="2+ month">2+ months</option>
+                                       
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" onclick="sendMessage()" class="button button-contactForm boxed-btn" style="padding:10px;">Continue</button>
+                        </div>
+                        {% comment %} <div class="form-group mt-3">
+                            <button type="button" onclick="sendMessage()" class="button button-contactForm boxed-btn" style="padding:10px;">Continue</button>
+                        </div> {% endcomment %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+  {% include 'call4jobemp/base/footer.html' %}
+  <script>
+    function select_employement(){
+        
+            console.log($("#employed_checkbox").is(":checked"))
+            // employed_checkbox
+            if ($("#employed_checkbox").is(":checked") == true){
+
+                $('#Current-company').css("display","block")
+
+                $('#Leaving-date').css("display","none")
+                $('#Pervious-company').css("display","none")
+
+
+            }else{
+               
+            $('#Pervious-company').css("display","block")
+            $('#Current-company').css("display","none")
+            $('#Leaving-date').css("display","block")
+
+            
+            }
+
+          
+            
+
+                      
+        // }else if(value=="no"){
+
+        //     $('#checked_checkbox').css("display","none")
+        //     $('#uncheck_checkbox').css("display","block")
+        //     $('#Pervious-company').css("display","block")
+        //     $('#Current-company').css("display","none")
+
+        // } 
+
+    }
+  </script>
+  <script>
+    function sendMessage(){
+        if(!$('#SignForm').valid()){
+            return ;
+        } 
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let employed_type = $("[name='employed_checkbox']:checked").val()
+        
+        let slug = $("#slug").val()
+
+        let year = $("#year").val()
+
+        let month = $("#month").val()
+
+        let Currentcompany = $("#Current-company").val()
+
+        let Previouscompany = $("#Previous-company").val()
+
+        let designation = $("#designation").val()
+
+        let key_skills = $("#key_skills").val()
+
+        let work_type = $("#work_type").val()
+
+        let joiningdate = $("#joining-date").val()
+
+        let leaveingdate = $("#Leaving-date").val()
+      
+
+        let salary = $("#salary").val()
+
+        let noticeperiod = $("#notice-period").val()
+
+   
+        
+        $.ajax({
+            type: "POST",
+            url: "/signupEmployementAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                employed_type:employed_type,
+                year:year,
+                month:month,
+                Currentcompany:Currentcompany,
+                Previouscompany:Previouscompany,
+                designation:designation,
+                key_skills:key_skills,
+                work_type:work_type,
+                joiningdate:joiningdate,
+                leaveingdate:leaveingdate,
+                salary:salary,
+                noticeperiod:noticeperiod,
+
+            },
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                setTimeout(()=>{
+                    window.location.href= '/login/';
+                    },2000);
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    });
+    
+
+        
+        
+
+        
+        
+        
+
+
+    }
+  </script>
+
+ {% comment %} <script>
+    function select_work(value){
+        if(value=="fulltime"){
+            $('#full_time_work_type').attr( 'checked', true )
+            $('#contract_work_type').attr( 'checked', false )
+        }else if(value=="contract"){
+            $('#full_time_work_type').attr( 'checked', false )
+            $('#contract_work_type').attr( 'checked', true )
+        }
+    }
+ </script> {% endcomment %}
+  {% endblock body %}
