@@ -1,0 +1,345 @@
+{% extends 'call4jobemp/base/base.html'%}
+{% load static %}
+{% block body %}
+<html class="no-js" lang="zxx">
+    <style>
+        .developer{
+            margin: 50px 0px 0px 0px;
+        }
+        footer{
+            margin-top:  80px;
+        }
+    </style>
+   
+   <body>
+
+
+    
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Preloader Start -->
+    {% include 'call4jobemp/base/header.html' %}
+    <section class="flex lg:flex-row flex-col">
+        <div class="w-full p-4 cursor-pointer flex md:justify-start justify-center pt-36 px-12 developer">
+            <div class="flex rounded-lg h-full bg-gray-100 p-2 flex-col hover:shadow-md  mt-20 padding: 0px 0px 10px 0px;">
+                <div class="mb-1">
+                    <h2 class="text-[#035E7B] text-xl title-font font-medium">{{job.job_title}}</h2>
+                </div>
+                <div class="flex-col">
+                    <h2 class="text-gray-900 text-md font-semibold">{{job.user.company_name}}</h2>
+                    <div class=" flex md:flex-row flex-col justify-start md:items-center items-start pt-4 mb-6">
+                        <div class="flex items-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                            </svg>
+    
+                            <p class="leading-relaxed text-base">{{job.minimum_exp}}-{{job.maximum_exp}} Yrs</p>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+    
+                            <p class="leading-relaxed text-base">{{job.minimum_annual_salary}} LPA-{{job.maximum_annual_salary}} LPA</p>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                            </svg>
+    
+                            <p class="leading-relaxed text-base">{{job.job_location}}</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        <p class="text-md font-semibold text-gray-800 mb-1">Job Description</p>
+                        {{job.job_description|safe}}
+                        <!-- <li>Write well designed, testable, efficient code by using best software development practices</li>
+                        <li>Create website layout/user interface by using standard HTML/CSS practices</li>
+                        <li>Integrate data from various back-end services and databases</li>
+                        <li>Gather and refine specifications and requirements based on technical needs</li>
+                        <li>Maintaining and expanding/enhancing the website once built</li>
+                        <li>Researching different software programs, maintaining software documentation</li> -->
+                    </div>
+                    <!-- <div class="">
+                        <p class="text-sm font-medium text-gray-800 mt-4 mb-2">Desired Candidate Profile</p>
+                        <li>0-3 yrs of proven working experience in web programming.</li>
+                        <li>Experience with HTML/XHTML, CSS, JavaScript</li>
+                        <li>Familiarity with at least one of the following programming languages: PHP, ASP.NET, Javascript
+                        </li>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Role</p>
+                        <ul>
+                            <li>Software Development - Other</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Industry Type</p>
+                        <ul>
+                            <li>Recruitment / Staffing</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Department</p>
+                        <ul>
+                            <li>Engineering - Software & QA</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Employment Type</p>
+                        <ul>
+                            <li>Full Time, Permanent</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Role Category</p>
+                        <ul>
+                            <li>Software Development</li>
+                        </ul>
+                    </div>
+                    <div class="mt-12">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Education</p>
+                        <ul>
+                            <li>UG :</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Any Graduate</p>
+                        <ul>
+                            <li>PG :</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-[#5a5a5a] mb-1">Role Category</p>
+                        <ul>
+                            <li>Software Development</li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <p class="text-sm font-medium text-[#5a5a5a] mt-4 mb-2">Key Skills</p>
+                        <ul class="flex flex-wrap w-full md:justify-start justify-center">
+                            <li class="p-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">Web
+                                technologies</li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">
+                                HTML/XHTML</li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">CSS
+                            </li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">
+                                JavaScript</li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">PHP
+                            </li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">ASP.NET
+                            </li>
+                            <li class="px-4 h-8  bg-[#5a5a5a]/20 flex items-center m-1 rounded-full ">
+                                Javascript</li>
+                        </ul>
+                    </div> -->
+                    
+                                   
+                    <div class="flex items-center justify-between mt-6">
+                        <form method="POST" action="/apply-job/{{job.slug}}">
+                            {% csrf_token %}
+                            <input hidden name="user_id" value="{{request.user.id}}">
+                            <input hidden name="job_id" value="{{job.id}}">
+                                {% if fetchApplyJob %}
+                                    <button type="button"  class="inline-block px-4 py-2 text-sm font-medium text-white bg-[#035E7B] rounded-full hover:bg-[#035E7B]/60">Applied</button>
+                                {% else %}
+                                
+                                    <button  class="inline-block px-4 py-2 text-sm font-medium text-white bg-[#035E7B] rounded-full hover:bg-[#035E7B]/60">Apply</button>
+                                {% endif %}
+                            </form>
+                        <p class="leading-relaxed text-xs">7 hours ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container px-5 pt-36 pb-12 mx-auto">
+            <div class="flex flex-col justify-center text-center w-full md:my-0 md:mb-8 mt-24 mb-16">
+                <h2 class="text-md text-[#035E7B] tracking-widest font-medium title-font mb-1 uppercase">MORE RELATED JOB</h2>
+                <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 uppercase">RECENT relevant Jobs</h1>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                {% for i in all_job %}
+                <div class="xl:w-1/2 lg:w-full md:w-1/2 w-full p-4 cursor-pointer flex justify-center">
+                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col w-[25em] hover:shadow-md">
+                        <div class="flex items-center mb-3">
+                            <div
+                                class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-purple-500 text-white flex-shrink-0">
+                                <img class="rounded-full" src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}" alt="">
+                            </div>
+                            <h2 class="text-gray-900 text-lg title-font font-medium">{{i.user.company_name}}</h2>
+                        </div>
+                        <div class="flex-col">
+                            <h2 class="text-[#035E7B] text-xl font-semibold">{{i.job_title}}</h2>
+                            <div class=" flex justify-between ites-center pt-4">
+                                <div class="flex items-center">
+                                    <img class="w-4 h-4 mr-2" src="{% static 'call4jobemp/assets/images/location-icon.png' %}" alt="">
+                                    <p class="leading-relaxed text-base">{{i.job_location|truncatechars:8}}</p>
+                                </div>
+                                <p class="leading-relaxed text-base">{{i.minimum_annual_salary}}LPA - {{i.maximum_annual_salary}}LPA</p>
+                            </div>
+                            <div class="flex items-center justify-between mt-3">
+                                <a href="/job-description/{{i.slug}}" class="text-[#035E7B] inline-flex items-center">Know More
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2"
+                                        viewBox="0 0 24 24">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <p class="leading-relaxed text-xs">7 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               {% endfor %}
+            </div>
+            <div class="flex justify-center pt-6">
+                <a href="./jobs.html">
+                    <button
+                        class="inline-flex text-[#035E7B] hover:text-white bg-transparent border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">View
+                        More</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- <main>
+
+        <div class="slider-area ">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>{{job.job_title}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+       
+        <div class="job-post-company pt-120 pb-120">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="single-job-items mb-50">
+                            <div class="job-items">
+                                <div class="company-img company-img-details">
+                                    <a href="#"><img src="{% static 'call4jobemp/assets/img/icon/job-list1.png' %}" alt=""></a>
+                                </div>
+                                <div class="job-tittle">
+                                    <a href="#">
+                                        <h4>
+                                            {{job.job_title}}
+                                        </h4>
+                                    </a>
+                                    <ul>
+                                        <li>{{job.user.company_name}}</li>
+                                        <li><i class="fas fa-map-marker-alt"></i>{{job.job_location}}</li>
+                                        <li>{{job.maximum_annual_salary}}LPA - {{job.minimum_annual_salary}}LPA</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="job-post-details">
+                            <div class="post-details1 mb-50">
+                                <div class="small-section-tittle">
+                                    <h4>Job Description</h4>
+                                </div>
+                                <p>{{job.job_description}}</p>
+                            </div>
+                            <div class="post-details2  mb-50">
+                                <div class="small-section-tittle">
+                                    <h4>Required Knowledge, Skills, and Abilities</h4>
+                                </div>
+                               <ul>
+                                   <li>{{job.skills}}</li>
+                                   
+                               </ul>
+                            </div>
+                            <div class="post-details2  mb-50">
+                                <div class="small-section-tittle">
+                                    <h4>Experience</h4>
+                                </div>
+                               <ul>
+                                   <li>minimum expercience : {{job.minimum_exp}}</li>
+                                   <li>maximum expercience : {{job.maximum_exp}}</li>
+
+                                  
+                               </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="post-details3  mb-50">
+                           <div class="small-section-tittle">
+                               <h4>Job Overview</h4>
+                           </div>
+                          <ul>
+                              <li>Posted date : <span>{{job.created_at}}</span></li>
+                              <li>Location : <span>{{job.job_location}}</span></li>
+                              <li>Vacancy : <span>{{job.no_of_emplyoee}}</span></li>
+                              <li>Job nature : <span>{{job.job_types}}</span></li>
+                              <li>Salary :  <span>{{job.maximum_annual_salary}} LPA</span></li>
+                              {% comment %} <li>Application date : <span>12 Sep 2020</span></li> {% endcomment %}
+                          </ul>
+                         <div class="apply-btn2">
+                            <form method="POST" action="/apply-job/{{job.slug}}">
+                                <input hidden name="user_id" value="{{request.user.id}}">
+                                <input hidden name="job_id" value="{{job.id}}">
+                                {% csrf_token %}
+                                    {% if fetchApplyJob %}
+                                    <button disabled class="btn">Applied</button>
+                                    {% else %}
+                                    <button  class="btn">Apply Now</button>
+                                    {% endif %}
+                            </form>
+                         </div>
+                       </div>
+                        {% comment %} <div class="post-details4  mb-50">
+                           <div class="small-section-tittle">
+                               <h4>Company Information</h4>
+                           </div>
+                              <span>Colorlib</span>
+                              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                            <ul>
+                                <li>Name: <span>Colorlib </span></li>
+                                <li>Web : <span> colorlib.com</span></li>
+                                <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                            </ul>
+                       </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main> -->
+    {% include 'call4jobemp/base/footer.html' %}
+
+	<!-- JS here -->
+	
+	
+        
+    </body>
+</html>
+{% endblock body %}

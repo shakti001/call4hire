@@ -1,0 +1,497 @@
+*{
+  margin: 0;
+  padding: 0;
+  /* transition: all 0.4s ease-in-out; */
+}
+.hidescrollbar {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
+}
+
+.hidescrollbar::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+.search_bar
+{
+    position: fixed;
+    z-index: 22;
+    width: -webkit-fill-available;
+    left: 0;
+    top: 6.6em;
+}
+aside#default-sidebar {
+  width: 20%;
+  height: auto;
+  top: 115px !important;
+}
+.side-bar-section{
+  background-color: #417d94 !important;
+  color: #ffffff;
+  border-radius: 30px !important;
+}
+.user-profile{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.cross{
+  display: flex;
+  justify-content: end;
+  font-size: 25px;
+}
+.user-profile-perfomance{
+  display: flex;
+  justify-content: space-around;
+}
+.custom-button{
+  margin: 0px 5px;
+}
+.user-profile .user-profile-image i{
+  font-size: 70px;
+  color: #ffffff;
+}
+.user-profile .user-profile-contant .heading{
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0px 45px;
+}
+.user-profile .user-profile-contant h1{
+  font-size: 18px;
+  font-weight: 500;
+}
+.user-profile .user-profile-contant h2{
+  font-size: 16px;
+  font-weight: 500;
+  padding: 2px 0px;
+}
+.user-performance{
+  margin: 25px 0px;
+}
+.profile-section{
+  margin-top: 40px;
+}
+.user-profile .user-profile-contant a{
+  color: rgb(24, 81, 236);
+}
+.user-profile-perfomance h2{
+  color: #cdcdcd;
+}
+.side-bar-section .box{
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  background-color: #999f9f;
+  padding: 30px 0px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.side-bar-section .box .first h1{
+  font-size: 20px;
+  font-weight: 600;
+}
+.side-bar-section .box .first h2{
+  font-size: 15px;
+  font-weight: 600;
+}
+.side-bar-section .box .first a{
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a63eb;
+}
+.side-bar-section .box .second h1{
+  font-size: 20px;
+  font-weight: 600;
+}
+.side-bar-section .box .second h2{
+  font-size: 15px;
+  font-weight: 600;
+}
+.side-bar-section .box .second a{
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a63eb;
+}
+.profile-section li a{
+  color: #ffffff !important;
+}
+.profile-section li a svg{
+  color: #ffffff;
+}
+.user-profile-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.user-profile-label img {
+  width: 100px;
+  height: auto;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.user-profile-label.clicked img {
+  border: 2px solid blue;
+  /* / Add any other styles you want to apply when the image is clicked / */
+}
+.user-box{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #dddbdb;
+  border-radius: 40px;
+  padding: 20px 0px;
+}
+.user-box_icon {
+  font-size: 110px;
+  color: #ffffff;
+}
+/* .username {
+  margin-left: 70px;
+} */
+.username__name {
+  display: flex;
+  justify-content: space-between;
+}
+.username__date {
+  margin-top: 10px;
+}
+.username_box-1 .username__name h1{
+  font-size: 18px;
+  font-weight: 600;
+}
+.username_box-1 .username__name a i{
+  font-size: 18px;
+}
+.username_box-2 .username__info{
+  margin-top: 30px;
+}
+.username_box-2 .username__info span{
+  display: block;
+  padding: 8px 0px;
+}
+.username_box-2 .username__info span i{
+  padding: 0px 10px 0px 0px;
+}
+.detials-box {
+  background-color: #fef2e4;
+  padding: 30px 50px;
+  border-radius: 40px;
+  text-align: center;
+}
+.details_box1{
+  display: flex;
+  align-items: baseline;
+}
+.details_box1 i{
+  padding: 0px 40px 0px 0px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+.user-box button{
+  background-color: #e57878;
+  color: ffffff;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 40px;
+  margin-top: 20px;
+}
+ .upload-resume .user-profile-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+ .upload-resume .user-profile-label img {
+  width: 100px; 
+  height: auto;
+}
+
+ .upload-resume .hidden-input {
+  display: none;
+}
+
+ .upload-resume .user-profile-label.clicked img {
+  border: 2px solid blue;
+  /* / Add any other styles you want to apply when the image is clicked / */
+}
+.skills {
+  display: flex;
+  margin-top: 50px;
+}
+.quick-link {
+  width: 30%;
+  box-shadow: 0px 8px 15px 0px #cdcdcd;
+  border-radius: 40px;
+  padding: 50px 53px;
+  height: 478px;
+}
+.quick-link h1{
+  font-size: 20px;
+  font-weight: 600;
+}
+.resume-box{
+  box-shadow: 0px 8px 15px 0px #cdcdcd !important;
+  border-radius: 40px;
+  padding: 50px 53px;
+  margin: 0px 20px;
+  height: 265px;
+}
+.apply-job-box{
+  box-shadow: 0px 8px 15px 0px #cdcdcd !important;
+  border-radius: 40px;
+  padding: 50px 53px;
+  margin: 0px 20px;
+  height: 480px;
+}
+.quick-link .quick-link-add span{
+  padding: 0px 120px 0px 0px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.quick-link-add {
+  margin-top: 20px;
+}
+.quick-link .quick-link-add a{
+  color: #1a63eb;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid;
+}
+.resume-box .box h1 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0px 50px 20px 0px;
+}
+.box {
+  display: flex;
+}
+.resume-box .rusume_box1 span{
+  font-size: 16px;
+  font-weight: 600;
+}
+.resume-box .upload-resume{
+  text-align: center;
+  margin-top: 39px;
+}
+.resume-box .upload-resume label.user-profile-label{
+  border: 1px solid;
+  padding: 10px 78px;
+  border-radius: 40px;
+}
+.skills .main {
+  flex-basis: 70%;
+}
+.resume-box-2{
+  box-shadow: 0px 8px 15px 0px #cdcdcd !important;
+  border-radius: 40px;
+  padding: 50px 53px;
+  margin: 30px 20px;
+  height: 180px;
+}
+.resume-box-2 .box-2 h1{
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0px 50px 20px 0px;
+}
+.box-2{
+  display: flex;
+  justify-content: space-between;
+}
+.resume-box-2 .box-2 a{
+  color: #1a63eb;
+}
+.resume-box-2 .rusume_box2 span{
+  font-size: 16px;
+  font-weight: 600;
+}
+.resume-box-2 .upload-resume{
+  text-align: center;
+  margin-top: 39px;
+}
+.education-box{
+  box-shadow: 0px 8px 15px 0px #cdcdcd !important;
+  border-radius: 40px;
+  padding: 50px 53px;
+  margin: 30px 20px;
+  height: auto;
+}
+.education-box .education a{
+  display: block;
+  padding: 5px 0px;
+  color: #1a63eb;
+}
+.education-box .education{
+  margin-top: 15px;
+}
+.education-box h1{
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0px 50px 20px 0px;
+}
+.education-box span{
+  font-size: 16px;
+  font-weight: 600;
+}
+.education-box .rusume_box2 .box-2 a{
+  color: #1a63eb;
+}
+.main-content{
+  padding: 10px 20px;
+}
+.main-content .main-body input{
+  border: 1px solid;
+  outline: none;
+  border-radius: 20px;
+  padding: 5px 50px;
+  margin-top: 20px;
+}
+.main-content .main-body input::placeholder{
+  font-size: 12px;
+}
+.radio-button {
+  display: flex;
+}
+.radio-button .radio{
+  padding: 10px 30px;
+}
+.current .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.type{
+  margin-top: 20px;
+}
+.type .sub-heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.select-menu{
+  margin-top: 20px;
+
+}
+.select-menu .experince .main-heading{
+  font-size: 15px;
+  font-weight: 600;
+
+}
+.select-menu .time {
+  display: flex;
+  margin-top: 10px;
+}
+.company{
+  margin-top: 20px;
+}
+.company .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.company input{
+  margin-top: 5px;
+}
+.designation{
+  margin-top: 20px;
+}
+.designation .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.designation input{
+  margin-top: 5px;
+}
+.Current-Salery{
+  margin-top: 20px;
+}
+.Current-Salery .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.Current-Salery input{
+  margin-top: 5px;
+}
+.skill{
+  margin-top: 20px;
+}
+.skill .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.skill input{
+  margin-top: 5px;
+}
+.job{
+  margin-top: 20px;
+}
+.job .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.job input{
+  margin-top: 5px;
+}
+.notice{
+  margin-top: 20px;
+}
+.notice .heading{
+  font-size: 15px;
+  font-weight: 600;
+}
+.notice input{
+  margin-top: 5px;
+}
+.radio-button .radio label{
+  font-size: 12px;
+  font-weight: 600;
+
+}
+.time-2{
+  margin-top: 15px;
+}
+.time-3{
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+.main-1{
+  margin-top: 5px;
+}
+.time-2 .main-heading{
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 0px;
+}
+.time-3 .main-heading{
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 0px;
+}
+.main-heading-1{
+  font-size: 15px;
+  font-weight: 600;
+}
+.main-heading-2{
+  font-size: 15px;
+  font-weight: 600;
+}
+.skillsButtonBox button{
+ width: 120px;
+ height: 40px;
+ border-radius: 20px;
+background-color: #cdcdcd;
+border: 0px;
+font-size: 17px;
+font-weight: 500;
+margin-bottom: 10px;
+}
+.skillsButtonBox{
+  margin-bottom: 20px;
+  text-align: center;
+}
+.skillsButtonBox button:hover{
+  background-color: #417d94;
+  color: white;
+}

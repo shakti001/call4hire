@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call4hire</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/Favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/Css/common.css">
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js"></script>
+    <script src="./assets/Js/common.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        section {
+            position: relative;
+            min-height: 100vh;
+            background-color: #035e7b38;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10em 20px;
+        }
+
+        section .container {
+            position: relative;
+            width: 800px;
+            height:750px;
+            background: #fff;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        section .container .user {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        section .container .user .formBx {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            padding: 40px;
+            transition: 0.5s;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section .container .user .formBx form h2 {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        section .container .user .formBx form .btn {
+            position: relative;
+            width: 100%;
+            padding: 10px;
+            background: #f5f5f5;
+            color: #333;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            margin: 8px 8px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: 300;
+            cursor: pointer;
+        }
+
+        section .container .user .formBx form .field {
+            background: #ffffff;
+            cursor: context-menu;
+        }
+
+        section .container .user .formBx form .select {
+            width: 47%;
+        }
+
+        section .container .user .formBx form .submit_btn {
+            max-width: 100px;
+            background: #035E7B;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.5s;
+        }
+
+        section .container .user .formBx form .signup {
+            position: relative;
+            margin-top: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #555;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        section .container .user .formBx form .signup a {
+            font-weight: 600;
+            text-decoration: none;
+            color: #035E7B;
+        }
+
+        section .container .signupBx {
+            pointer-events: none;
+        }
+
+        section .container.active .signupBx {
+            pointer-events: initial;
+        }
+
+        section .container .signupBx .formBx {
+            left: 100%;
+        }
+
+        section .container.active .signupBx .formBx {
+            left: 0;
+        }
+
+        section .container .signupBx .imgBx {
+            left: -100%;
+        }
+
+        section .container.active .signupBx .imgBx {
+            left: 0%;
+        }
+
+        section .container .signinBx .formBx {
+            left: 0%;
+        }
+
+        section .container.active .signinBx .formBx {
+            left: 100%;
+        }
+
+        section .container .signinBx .imgBx {
+            left: 0%;
+        }
+
+        section .container.active .signinBx .imgBx {
+            left: -100%;
+        }
+
+        @media (max-width: 991px) {
+            section .container {
+                max-width: 400px;
+            }
+
+            section .container .imgBx {
+                display: none;
+            }
+
+            section .container .user .formBx {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section .container {
+                height: 1050px;
+            }
+
+            section .container .user .formBx form .input {
+                width: 100%;
+            }
+
+            section .container .user .formBx form .select {
+                width: 100%;
+            }
+        }
+
+
+        /* toggle button css */
+        input[type="checkbox"] {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #9bc8d9;
+            outline: none;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border: 1px solid #cfcfcf;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: translateX(100%);
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #00ed64;
+        }
+
+        /* toggle button css ends */
+    </style>
+    <script>
+        const toggleForm = () => {
+            const container = document.querySelector('.container');
+            container.classList.toggle('active');
+        };
+    </script>
+</head>
+
+<body>
+    <!-- navbar -->
+    <header class="text-gray-600 body-font fixed w-full bg-white z-10 shadow-md">
+        <div class="mx-auto flex flex-wrap p-5 flex-row items-center justify-between">
+            <!-- desktop navbar -->
+            <a href="./index.html" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img class="w-24" src="./assets/images/logo.svg" alt="">
+            </a>
+            <nav class="md:ml-auto md:mr-auto lg:flex flex-wrap items-center text-base justify-center hidden">
+                <a href="./index.html"
+                    class="mr-5 hover:text-[#035E7B] font-semibold cursor-pointer border-b-2 border-transparent hover:border-[#035E7B]">Home</a>
+                <a href="./jobs.html"
+                    class="mr-5 hover:text-[#035E7B] font-semibold cursor-pointer border-b-2 border-transparent hover:border-[#035E7B]">Find
+                    a Job</a>
+                <a href="./about.html"
+                    class="mr-5 hover:text-[#035E7B] font-semibold cursor-pointer border-b-2 border-transparent hover:border-[#035E7B]">About
+                    us</a>
+                <a href="./Contact us.html"
+                    class="mr-5 hover:text-[#035E7B] font-semibold cursor-pointer border-b-2 border-transparent hover:border-[#035E7B]">Contact</a>
+            </nav>
+            <div class="lg:block hidden">
+                <button onclick="toggleModal()"
+                    class="inline-flex items-center bg-transparent hover:bg-[#035E7B] border-2 border-[#035E7B] py-2 px-12 focus:outline-none hover:bg-[#035E7B] rounded text-[#035E7B] hover:text-white mt-4 md:mt-0 rounded-full font-semibold">Login</button>
+            </div>
+            <!-- //desktop navbar... -->
+            <!-- Mobile navbar -->
+            <ul class="px-4">
+                <li><button class="block py-2 dropdown-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-12 h-12 text-[#035E7B] flex lg:hidden">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                        </svg></button>
+                    <ul class="bg-white text-[#035E7B] text-sm hidden absolute w-full left-0 shadow-md dropdown">
+                        <a href="./index.html">
+                            <li class="px-5 py-3 hover:bg-[#035E7B]/10 mr-5 font-semibold cursor-pointer">Home</li>
+                        </a>
+                        <a href="./jobs.html">
+                            <li class="px-5 py-3 hover:bg-[#035E7B]/10 mr-5 font-semibold cursor-pointer">Find
+                                a Job</li>
+                        </a>
+                        <a href="./about.html">
+                            <li class="px-5 py-3 hover:bg-[#035E7B]/10 mr-5 font-semibold cursor-pointer">About
+                                us</li>
+                        </a>
+                        <a href="./Contact us.html">
+                            <li class="px-5 py-3 hover:bg-[#035E7B]/10 mr-5 font-semibold cursor-pointer">Contact</li>
+                        </a>
+                        <a href="#">
+                            <li class="px-5 py-3 hover:bg-[#035E7B]/10 mr-5 font-semibold cursor-pointer">
+                                <button onclick="toggleModal()"
+                                    class="inline-flex items-center bg-transparent hover:bg-[#035E7B] border-2 border-[#035E7B] py-2 px-12 focus:outline-none text-[#035E7B] hover:text-white mt-4 md:mt-0 rounded-full font-semibold">Login</button>
+                            </li>
+                        </a>
+                    </ul>
+                </li>
+            </ul>
+            <!-- //mobile nevbar... -->
+        </div>
+    </header>
+    <!-- //navbar... -->
+
+
+    <!-- hero section -->
+    <section>
+        <div class="container box">
+            <!-- signin box -->
+            <div class="user signinBx">
+                <div class="formBx">
+                    <form action="" onsubmit="return false;">
+                        <h2>Create an account as Employee</h2>
+                        <div class="flex flex-wrap justify-center mb-[10px]">
+                            <input class="select btn" type="text" name="" placeholder="Full Name" />
+                            <input class="select btn" type="email" name="" placeholder="Email Id" />
+                            <input class="select btn" type="tel" name="" placeholder="Mobile Number" />
+                            <input class="select btn" type="text" name="" placeholder="Address" />
+                            <input class="select btn" type="text" placeholder="Date of Birth"
+                                onfocus="(this.type='date')">
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Gender</option>
+                                <option value="">Male</option>
+                                <option value="">Female</option>
+                                <option value="">Other</option>
+                            </select>
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Work Status</option>
+                                <option value="">Experienced</option>
+                                <option value="">Fresher</option>
+                            </select>
+                            <input class="select btn" type="password" name="" placeholder="Password" />
+                            <input class="select btn" type="password" name="" placeholder="Confirm Password" />
+                            <input class="select btn" type="text" placeholder="Upload Resume"
+                                onfocus="(this.type='file')">
+                        </div>
+                        <input onclick="toggleForm();" class="btn submit_btn" type="submit" name="" value="continue" />
+                        <p class="signup">
+                            Already have an account ?
+                            <a href="./Employee login.html">Sign in.</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- //signin box ends... -->
+            <!-- signup box -->
+            <div class="user signupBx">
+                <div class="formBx flex flex-col items-start justify-center">
+                    <form action="" onsubmit="return false;">
+                        <h2>Create an account as Employee</h2>
+                        <div class="flex flex-wrap justify-center mb-[10px]">
+                            <div class="select btn field flex items-center justify-between">
+                                <input type="checkbox">
+                                <span class="">Are you currently employed?</span>
+                            </div>
+                            <div class="select btn field flex flex-col items-start justify-between bg-white">
+                                <span class="">Total Work Experienced</span>
+                                <div class="flex lg:flex-row flex-col" style="width: 100%;">
+                                    <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn"
+                                        id="cars">
+                                        <option value="" disabled selected hidden>Select Year</option>
+                                        <option value="">1 year</option>
+                                        <option value="">2 year</option>
+                                        <option value="">3 year</option>
+                                        <option value="">4 year</option>
+                                        <option value="">5 year</option>
+                                        <option value="">6 year</option>
+                                        <option value="">7 year</option>
+                                        <option value="">8 year</option>
+                                        <option value="">9 year</option>
+                                        <option value="">10 year</option>
+                                        <option value="">10+ year</option>
+                                    </select>
+                                    <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn"
+                                        id="cars">
+                                        <option value="" disabled selected hidden>Select Month</option>
+                                        <option value="">1 month</option>
+                                        <option value="">2 month</option>
+                                        <option value="">3 month</option>
+                                        <option value="">4 month</option>
+                                        <option value="">5 month</option>
+                                        <option value="">6 month</option>
+                                        <option value="">7 month</option>
+                                        <option value="">8 month</option>
+                                        <option value="">9 month</option>
+                                        <option value="">10 month</option>
+                                        <option value="">11 month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input class="select btn" type="text" name="" placeholder="Current Company Name" />
+                            <input class="select btn" type="text" name="" placeholder="Designation" />
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Work Type</option>
+                                <option value="">Full time </option>
+                                <option value="">Part time </option>
+                                <option value="">contract</option>
+                            </select>
+                            <input class="select btn" type="text" placeholder="Joining date"
+                                onfocus="(this.type='date')">
+                            <input class="select btn" type="text" name="" placeholder="Current Salary" />
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Select notice period </option>
+                                <option value="Frasher" default>15 days</option>
+                                <option value="">1 Month</option>
+                                <option value="">2 Month</option>
+                                <option value="">2+ Month</option>
+                            </select>
+                            <textarea class="btn" name="" id="" cols="30" rows="10"
+                                placeholder="Add key skills"></textarea>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div onclick="toggleForm();" class="flex items-center justify-center btn submit_btn">
+                                Back
+                            </div>
+                            <a class="btn submit_btn" href="./Employee login.html">continue</a>
+                        </div>
+                        <p class="signup">
+                            Already have an account ?
+                            <a href="./Employee login.html">Sign in.</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- //signup box ends... -->
+        </div>
+    </section>
+    <!-- //hero section... -->
+
+
+
+
+
+
+    <!-- footer -->
+    <footer class="text-gray-600 body-font bg-gray-100">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap md:text-left text-left order-first">
+                <!-- first colomn   -->
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CONTACT INFO</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            Head Office Address :Plot no.29,Molshree Residency 3rd Floor Flat No. 303 Mission Compound,
+                            Ajmer Road.
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Phone : +919251649440</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Email : info@call4hire.com</a>
+                        </li>
+                    </nav>
+                </div>
+                <!-- //first colomn ends... -->
+                <!-- second colomn -->
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">IMPORTANT LINK</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 cursor-pointer">About Us</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Contact Us</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Support</a>
+                        </li>
+                    </nav>
+                </div>
+                <!-- //second colomn... -->
+                <!-- third colomn -->
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">NEWSLETTER</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            Heaven fruitful doesn't over lesser in days. Appear creeping.
+                        </li>
+                    </nav>
+                </div>
+                <!-- //third colomn... -->
+                <!-- forth colomn -->
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <div
+                        class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-left items-end md:justify-start">
+                        <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+                            <label for="footer-field" class="leading-7 text-sm text-gray-600">Email Address</label>
+                            <input type="text" id="footer-field" name="footer-field"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded-full border border-gray-300 focus:bg-transparent focus:ring-2 focus:ring-[#035E7B]/60 focus:border-[#035E7B] text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                        <button
+                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-[#035E7B] border-0 py-2 px-6 focus:outline-none hover:bg-[#035E7B]/80 rounded-full">Submit</button>
+                    </div>
+                </div>
+                <!-- //forth colomn... -->
+            </div>
+        </div>
+        <hr>
+        <!-- Copyrights© section -->
+        <div class="">
+            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+                <a class="flex title-font font-medium items-left text-gray-900 mb-4 md:mb-0">
+                    <img class="w-24" src="./assets/images/logo.svg" alt="">
+                </a>
+                <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">2020 All Copyrights© Reserved |
+                    powered by Seek & save softwares
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+        <!-- //Copyrights© section ends... -->
+    </footer>
+    <!-- //footer... -->
+    <!-- modal section -->
+    <div class="fixed z-10 top-0 w-full left-0 hidden" id="modal">
+        <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 ">
+                <div class="absolute inset-0 bg-gray-900 opacity-75">
+                </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+                <div class="inline-block align-center bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"
+                    role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <div class="bg-gray-200 px-4 py-3 text-right">
+                        <button type="button" class="py-2 px-4 mr-2" onclick="toggleModal()"><i
+                                class="fas fa-times"></i><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="w-8 h-8 text-[#035e7b]">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <section class="text-gray-600 body-font">
+                            <div class="container px-5 py-24 mx-auto flex flex-wrap">
+                                <div class="flex flex-wrap -m-4">
+                                    <a class="m-auto" href="./Employee login.html">
+                                        <div class="p-4 w-full">
+                                            <div
+                                                class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                                                <div
+                                                    class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                                                    <img src="./assets/images/employee.svg" alt="">
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Login
+                                                        as Employee</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="m-auto" href="./Employer login.html">
+                                        <div class="p-4 w-full">
+                                            <div
+                                                class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                                                <div
+                                                    class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                                                    <img src="./assets/images/employer.svg" alt="">
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Login
+                                                        as Employer</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //modal section... -->
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+{% extends 'call4jobemp/base/base.html'%}
+{% load static %}
+
+{% block body %}
+<style>
+    .error{
+        color:red;
+        text-align: left;
+    }
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+      position: relative;
+      background-color: #035e7b38;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10em 20px 5em 20px;
+    }
+    .login-page{
+      padding: 0px;
+
+    }
+
+    section .container {
+      position: relative;
+      width: 600px;
+      height: 500px;
+      background: #fff;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      border-radius: 6px;
+    }
+
+    section .container .user {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    section .container .user .formBx {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      transition: 0.5s;
+    }
+
+    section .container .user .formBx form h2 {
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      width: 100%;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    section .container .user .formBx form input {
+      position: relative;
+      width: 100%;
+      padding: 10px;
+      background: #f5f5f5;
+      color: #333;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 8px 8px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    section .container .user .formBx form .select {
+      position: relative;
+      width: 47%;
+      padding: 10px;
+      background: #f5f5f5;
+      color: #333;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 8px 8px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    .submit_btn {
+      position: relative;
+      width: 47%;
+      padding: 10px;
+      background: #f5f5f5;
+      color: #333;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 8px 8px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    .btn {
+      max-width: 100px;
+      background: #035E7B;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: 0.5s;
+    }
+
+    section .container .user .formBx form .signup {
+      position: relative;
+      margin-top: 20px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #555;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    section .container .user .formBx form .signup a {
+      font-weight: 600;
+      text-decoration: none;
+      color: #035E7B;
+    }
+
+    section .container .signinBx .formBx {
+      left: 0%;
+    }
+
+    section .container.active .signinBx .formBx {
+      left: 100%;
+    }
+
+    section .container .signinBx .imgBx {
+      left: 0%;
+    }
+
+    section .container.active .signinBx .imgBx {
+      left: -100%;
+    }
+
+    @media (max-width: 991px) {
+      section .container {
+        max-width: 400px;
+      }
+
+      section .container .imgBx {
+        display: none;
+      }
+
+      section .container .user .formBx {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section .container {
+        height: 350px;
+      }
+
+      section .container .user .formBx form input {
+        width: 100%;
+      }
+
+      section .container .user .formBx form .select {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <!--  header Start -->
+  {% include 'call4jobemp/base/header.html' %}
+  <!-- header end -->
+  <section>
+    <div class="container box">
+      <!-- signin box -->
+      <div class="user signinBx">
+        <div class="formBx">
+            <form class="form-contact contact_form" method="POST" id="SignForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2>Sign In Employee</h2>
+                <div class="flex flex-wrap justify-center">
+                <input value="{{data.email}}" class="form-control " data-rule-required="true" name="email" id="emails" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                <input class="form-control" data-rule-required="true" name="password" id="password"  type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Password'" placeholder="Enter your Password">
+                </div>
+                <button onclick="sendMessage()" class="submit_btn btn">Login</button>
+                <p class="signup">
+                Don't have an account ?
+                <button><a href="/signup/">Sign Up</a></button>
+                </p>
+          </form>
+        </div>
+      </div>
+      <!-- //signin box ends... -->
+    </div>
+  </section>
+
+        <!-- Hero Area End -->
+    <!-- ================ contact section start ================= -->
+    <!-- <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="contact-title">Login Employee</h2>
+                </div>
+                <div class="col-lg-12">
+                    <form class="form-contact contact_form" method="POST" id="SignForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <div class="col-sm-6">
+                                <label><B>Email</B></label>
+
+                                <div class="form-group">
+                                    <input value="{{data.email}}" class="form-control " data-rule-required="true" name="email" id="emails" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Password</B></label>
+                                <div class="form-group">
+                                    <input class="form-control" data-rule-required="true" name="password" id="password"  type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Password'" placeholder="Enter your Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" onclick="sendMessage()" class="button button-contactForm boxed-btn" style="padding:10px;">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+  
+  {% include 'call4jobemp/base/footer.html' %}
+
+  <script>
+ function sendMessage(){
+    if(!$('#SignForm').valid()){
+        return ;
+    } 
+
+ }
+  </script>
+  {% comment %} setTimeout(()=>{
+    window.location.href= '/login/';
+    },3000); {% endcomment %}
+    {% comment %} $('#signup').trigger("reset"); {% endcomment %}
+    {% comment %} //$('#informationModal').modal('show');
+
+  {% comment %} $.ajax({
+        type: "POST",
+        url: "//",
+        headers: { 'X-CSRFToken': csrftoken },
+        data:
+      {
+       
+
+   },
+    success:function(res){
+        console.log(res.message);
+        console.log('success');
+        toastr.success(res.message);
+        setTimeout(()=>{
+        window.location.href= '/login/';
+        },3000);
+        {% comment %} $('#signup').trigger("reset"); {% endcomment %}
+        {% comment %} //$('#informationModal').modal('show');
+        $('.loader').hide();
+
+      },
+      error:function(res){
+        console.log(res)
+        toastr.error(res.responseJSON.message);
+        $('.loader').hide();
+
+      }
+}); {% endcomment %} 
+  {% endblock body %}

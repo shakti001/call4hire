@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'call4jobemp/base/base.html'%}
+    {% load static %}
+    {% block title %} Profile {% endblock title %}
+    
+    {% block body %}
+
+<body class="hidescrollbar">
+    <!-- search bar -->
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% include 'call4jobemp/base/header.html' %}
+
+    <!-- //search bar... -->
+    <!-- navbar -->
+   
+    <!-- //navbar... -->
+    <!-- Hero Section -->
+    <input type="hidden" value="{{request.user.slug}}" id="slug">
+    <section class="text-gray-600 body-font pt-24">
+        <div class="container px-5 py-24 items-center">
+          
+            <div class="skills">
+                <div class="quick-link">
+                    <h1>Quick Links</h1>
+                       
+                    <div class="quick-link-add">
+                        <span><a href="/apply-jobs/{{user.slug}}"  role="button">Apply-jobs</a></span>
+                    </div>
+                    <!-- <div class="quick-link-add">
+                        <span>Education</span>
+                        <a onclick="Education()" role="button">Add</a>
+                    </div> -->
+                    
+                </div>
+                <div class="main">
+                    <div class="apply-job-box">
+                        
+                        <div class="w-full max-w-full">
+                            <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
+                              <div class="table-responsive">
+                                {% if apply_job %}
+                                <table class="table table-flush text-slate-500" datatable id="datatable-search">
+                                  <thead class="thead-light">
+                                    <tr>
+                                      <th>Job Title</th>
+                                      <th>Company name</th>
+                                      <!-- <th>Status</th> -->
+
+                                    
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                    {% for i in apply_job %}
+                                    <tr>
+                                      <td class="font-normal leading-normal text-sm">{{i.job.job_title}}</td>
+                                      <td class="font-normal leading-normal text-sm">{{i.job.company_name}}</td>
+                                      <!-- <td class="font-normal leading-normal text-sm">{{i.job.job_status}}</td> -->
+
+                                    
+                                    </tr>
+                                    
+                                   {% endfor %}
+                                 
+                                  </tbody>
+                                </table>
+                                {% else %}
+                                <h3>No data found </h3>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'call4jobemp/base/footer.html' %}
+
+    <!-- pop-up for resume start -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="Key_skiils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content main-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Key skills</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body main-body">
+                    <div class="title">Add Skill</div>
+                    <form method="POST" id="keyskillform">
+                        {% csrf_token %}
+                    <input id="Keyskills" data-rule-required="true" {% if data.key_skills%} value="{{data.key_skills}}" {% endif %} class="form-control" type="text" placeholder="Enter Your skills">
+                </form>
+
+                </div>
+                <div class="skillsButtonBox">
+                    <button onclick="addSkillsInput('Sports')">Sports+</button>
+                    <!-- <button onclick="addSkillsInput('Reading books')">Reading books+</button> -->
+                    <button onclick="addSkillsInput('Drawing')">Drawing+</button>
+                    <button onclick="addSkillsInput('Music')">Music+</button>
+                    <button onclick="addSkillsInput('Dance')">Dance+</button>
+                    <button onclick="addSkillsInput('Other')">Other+</button>
+
+
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="KeySkillsSave()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="It_skiils" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content main-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">It Skills</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body main-body">
+                    <div class="title">Add It sSkill</div>
+                    <form method="POST" id="Itskillform">
+                        {% csrf_token %}
+                    <input id="Itskills" data-rule-required="true" {% if data.it_skills%} value="{{data.it_skills}}" {% endif %} class="form-control" type="text" placeholder="Enter Your IT skills">
+                </form>
+
+                </div>
+                <div class="skillsButtonBox">
+                    <button onclick="addItSkillsInput('Python')">Python+</button>
+                    <button onclick="addItSkillsInput('Php')">Php+</button>
+                    <button onclick="addItSkillsInput('Html')">Html+</button>
+                    <button onclick="addItSkillsInput('Javascript')">Javascript+</button>
+                    <button onclick="addItSkillsInput('css')">css+</button>
+
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="ItSkillsSave()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- pop-up for resume end -->
+
+    <!-- pop-up for resume start -->
+
+    <!-- add-employment-modal -->
+    <div class="modal fade" id="employementid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employment</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="current">
+                        <div class="heading">
+                            Are you currently employed?
+                        </div>
+                        <div class="radio-button">
+                            <div class="form-check radio">
+                                <input class="form-check-input"  onclick="select_employement('yes')"  {% if data.current_emp == 'yes' %} checked {% else %}checked{% endif %} name="employed_checkbox" value="yes" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    yes
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" onclick="select_employement('no')" {% if data.current_emp == 'no' %} checked {% else %}{% endif %} name="employed_checkbox" value="no" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="type">
+                        <div class="sub-heading">
+                            Employment Type
+                        </div>
+                        <div class="radio-button">
+                            <div class="form-check radio">
+                                <input class="form-check-input" {% if data.work_type == 'fulltime' %} checked {% endif %} name="employment_type_checkbox" value="fulltime" type="radio" 
+                                    id="flexRadioDefault2"> 
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Full Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" name="employment_type_checkbox" value="parttime" type="radio" 
+                                    id="flexRadioDefault2" {% if data.work_type == 'parttime' %} checked {% endif %}>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Part Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" name="employment_type_checkbox" value="contract" type="radio" 
+                                    id="flexRadioDefault2" {% if data.work_type == 'contract' %} checked {% endif %}>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Contract
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="select-menu">
+                        <div class="experince">
+                            <div class="main-heading">Total Expernices</div>
+                            <div class="time">
+                                <select id="year" class="form-select" aria-label="Default select example">
+                                    <option disabled selected>Year</option>
+                                    <option {% if data.work_exp_year == '0' %} selected {% endif %} value="0">0 year</option>
+                                    <option  {% if data.work_exp_year == '1' %} selected {% endif %}  value="1">1 year</option>
+                                    <option {% if data.work_exp_year == '2' %} selected {% endif %}   value="2">2 year</option>
+                                    <option {% if data.work_exp_year == '3' %} selected {% endif %} value="3">3 year</option>
+                                    <option {% if data.work_exp_year == '4' %} selected {% endif %}  value="4">4 year</option>
+                                    <option {% if data.work_exp_year == '5' %} selected {% endif %} value="5">5 year</option>
+                                    <option {% if data.work_exp_year == '6' %} selected {% endif %}  value="6">6 year</option>
+                                    <option {% if data.work_exp_year == '7' %} selected {% endif %}  value="7">7 year</option>
+                                    <option {% if data.work_exp_year == '8' %} selected {% endif %}  value="8">8 year</option>
+                                    <option {% if data.work_exp_year == '9' %} selected {% endif %}  value="9">9 year</option>
+                                    <option {% if data.work_exp_year == '10' %} selected {% endif %}  value="10">10 year</option>
+                                    <option {% if data.work_exp_year == '10+' %} selected {% endif %}  value="10+">10+ year</option>
+
+                                </select>
+
+
+
+                                <select id="month" class="form-select" aria-label="Default select example">
+                                    <option disabled selected>Month</option>
+                                    <option {% if data.work_exp_month == '0' %} selected {% endif %} value="0">0 month</option>
+                                    <option {% if data.work_exp_month == '1' %} selected {% endif %} value="1">1 month</option>
+                                    <option {% if data.work_exp_month == '2' %} selected {% endif %} value="2">2 month</option>
+                                    <option {% if data.work_exp_month == '3' %} selected {% endif %} value="3">3 month</option>
+                                    <option {% if data.work_exp_month == '4' %} selected {% endif %} value="4">4 month</option>
+                                    <option {% if data.work_exp_month == '5' %} selected {% endif %} value="5">5 month</option>
+                                    <option {% if data.work_exp_month == '6' %} selected {% endif %}value="6">6 month</option>
+                                    <option {% if data.work_exp_month == '7' %} selected {% endif %} value="7">7 month</option>
+                                    <option {% if data.work_exp_month == '8' %} selected {% endif %} value="8">8 month</option>
+                                    <option {% if data.work_exp_month == '9' %} selected {% endif %}value="9">9 month</option>
+                                    <option {% if data.work_exp_month == '10' %} selected {% endif %} value="10">10 month</option>
+                                    <option {% if data.work_exp_month == '10+' %} selected {% endif %} value="11">11 month</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {% if data.current_company_name %}
+                    <div class="company" id="Current-company" >
+                        <div class="heading">Current Company Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{data.current_company_name}}" id="current-company"  class="form-control" placeholder="type your orgnation"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="company" id="Current-company"style="display:none" >
+                        <div class="heading">Current Company Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="" id="current-company"  class="form-control" placeholder="type your orgnation"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if data.pervious_company_name %}
+                    <div class="company" id="Pervious-company" >
+                        <div class="heading">Previous Company Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{data.pervious_company_name}}" id="pervious-company" class="form-control" placeholder="Enter your previos name"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="company" id="Pervious-company" style="display:none">
+                        <div class="heading">Previous Company Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="" id="pervious-company" class="form-control" placeholder="Enter your previos name"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="designation">
+                        <div class="heading">Current designation</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input value="{{data.designation}}" type="text" id="designation"class="form-control" placeholder="type your orgnation"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    
+                    <div class="company" id="joining-date" >
+                        <div class="heading">Joining Date</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="date" value="{{data.joining_date|date:'Y-m-d'}}" id="join-date" class="form-control" 
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% if data.leaving_date %}
+                    <div class="company"  id="Leaving-date" >
+                        <div class="heading">Leaving Date</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="date" id="leave-date" value="{{data.leaving_date|date:'Y-m-d'}}"   class="form-control" 
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="company" style="display: none;" id="Leaving-date" >
+                        <div class="heading">Leaving Date</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="date" id="leave-date"   class="form-control" 
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    {% endif %}
+                  
+
+                    <div class="Current-Salary">
+                        <div class="heading">Current Salary</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{data.current_salary}}" id="salary"class="form-control" placeholder="current salery" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <div class="heading">Skill Used</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input id="skill-used" value="{{data.skills_used}}" type="text" class="form-control" placeholder="Enter your Experties"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                  
+
+                    <div class="select-menu">
+                        <div class="experince">
+                            <div class="main-heading">Notice Period</div>
+                            <div class="time">
+                                <select id="notice-period" class="form-select" aria-label="Default select example">
+                                    <option {% if data.notice_period == "15days" %} selected {% endif %} value="15days" default>15 days</option>
+                            <option {% if data.notice_period == "1" %} selected {% endif %} value="1">1 Month</option>
+                            <option {% if data.notice_period == "2" %} selected {% endif %} value="2">2 Month</option>
+                            <option {% if data.notice_period == "3" %} selected {% endif %} value="3">2+ Month</option>
+                                </select>
+                             
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="employementUpdate()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- add-employment-modal -->
+
+
+
+    <!-- add-education-modal -->
+    <!-- <div class="modal fade" id="" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="main-heading">Education</div>
+                    <div class="time">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Education</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                    <div class="skill">
+                        <div class="heading">Universty</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Enter your universty"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="main-heading-1">Course</div>
+                    <div class="time">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>select Course</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+                    <div class="time-2">
+                        <div class="main-heading">Specialization</div>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>select Specialization</option>
+                        </select>
+                    </div>
+
+                    <div class="type">
+                        <div class="sub-heading">
+                            Course Type
+                        </div>
+                        <div class="radio-button">
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Full Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Part Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    corresponence/distance learning
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="select-menu">
+                        <div class="experince">
+                            <div class="main-heading">Course Durcation</div>
+                            <div class="time">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>starting Year</option>
+                                    <option value="1">2015</option>
+                                    <option value="2">2016</option>
+                                    <option value="3">2017</option>
+                                    <option value="4">2018</option>
+                                </select>
+                                to
+
+
+
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>ending year</option>
+                                    <option value="1">2018</option>
+                                    <option value="2">2019</option>
+                                    <option value="3">2020</option>
+                                    <option value="4">2021</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="time-3">
+                        <div class="main-heading">Grading system</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Grading system</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- add-education-modal -->
+
+
+
+    <!-- add-education--phd---modal -->
+    <!-- <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="main-heading-2">Education</div>
+                    <div class="time">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Education</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                    <div class="skill">
+                        <div class="heading">Universty</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Enter your universty"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="main-heading">Course</div>
+                    <div class="time">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>select Course</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+                    <div class="time-2">
+                        <div class="main-heading">Specialization</div>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>select Specialization</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+                    <div class="type">
+                        <div class="sub-heading">
+                            Course Type
+                        </div>
+                        <div class="radio-button">
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Full Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Part Time
+                                </label>
+                            </div>
+                            <div class="form-check radio">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
+                                    id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    corresponence/distance learning
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="select-menu">
+                        <div class="experince">
+                            <div class="main-heading">Course Durcation</div>
+                            <div class="time">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>starting Year</option>
+                                    <option value="1">2015</option>
+                                    <option value="2">2016</option>
+                                    <option value="3">2017</option>
+                                    <option value="4">2018</option>
+                                </select>
+                                to
+
+
+
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>ending year</option>
+                                    <option value="1">2018</option>
+                                    <option value="2">2019</option>
+                                    <option value="3">2020</option>
+                                    <option value="4">2021</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="time-3">
+                        <div class="main-heading">Grading system</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Grading system</option>
+                            <option value="1">PHD</option>
+                            <option value="2">maste & post-graducation</option>
+                            <option value="3">graducation / diploma</option>
+                            <option value="4">12th</option>
+                            <option value="5">10th</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- add-education--phd---modal -->
+
+
+
+
+    <!-- add-name-edit-modal -->
+     <div class="modal fade" id="BasicDetails" tabindex="" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Basic Details</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" id="BasicForm">
+                    {% csrf_token %}
+                <div class="modal-body">
+                    <div class="company">
+                        <div class="heading">First Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{user.first_name}}" id="fname" class="form-control" placeholder="name.." aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="heading">Last Name</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{user.last_name}}" id="lname" class="form-control" placeholder="name.." aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class=" designation">
+                        <div class="heading"> Mobile Numer</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" value="{{user.company_mobile_number}}" id="mobile_num" class="form-control" placeholder="Enter your number"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="Current-Salery">
+                        <div class="heading"> Email</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" id="email" value="{{user.email}}" class="form-control" placeholder="Enter your email" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <div class="heading">Add Location</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text"  value="{{user.employee_address}}" id="add_location" class="form-control" placeholder="Area" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="heading">Availability to join</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <select name="" id="abilityjoin" class="form-control">
+                                <option {% if data.notice_period == 'Immediate' %} selected {% endif %} value="immediate">Immediate Joiner</option>
+                                <option {% if data.notice_period == '15days' %} selected {% endif %} value="15days">15 Days</option>
+                                <option {% if data.notice_period == '1' %} selected {% endif %} value="1">1 month</option>
+                                <option {% if data.notice_period == '2' %} selected {% endif %} value="2">2 month</option>
+                                <option {% if data.notice_period == '3' %} selected {% endif %} value="3">2+ months</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="heading">Work Status</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <select name="" id="workstatus" class="form-control">
+                                <option {% if user.work_status == 'Fresher' %} selected {% endif %} value="Fresher">Fresher</option>
+
+                                <option {% if user.work_status == 'Experienced' %} selected {% endif %} value="Experienced">Experienced</option>
+                              
+
+
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </form>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="BasicDetailsSave()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        <!-- </form> -->
+        </div>
+    </div> 
+
+
+
+
+
+    <!-- <div class="modal fade" id="BasicDetails">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employment</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class=" designation">
+                        <div class="heading">Add Mobile Numer</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Enter your number"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="company">
+                        <div class="heading">Add Loction</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Street..." aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <div class="modal" id="simple" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content main-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">It Skills</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body main-body">
+                    <div class="title">Add It sSkill</div>
+                    <form method="POST" id="Itskillform">
+                        {% csrf_token %}
+                    <input id="Itskills" data-rule-required="true" {% if data.it_skills%} value="{{data.it_skills}}" {% endif %} class="form-control" type="text" placeholder="Enter Your IT skills">
+                </form>
+
+                </div>
+               
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button onclick="ItSkillsSave()" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- add-name-edit-modal -->
+
+
+
+
+    <!-- add-name-detals-modal -->
+    <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employment</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class=" designation">
+                        <div class="heading">Add Mobile Numer</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Enter your number"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="company">
+                        <div class="heading">Add Loction</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Street..." aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add-name-detals-modal -->
+
+
+
+
+
+    <!--12-education-modal -->
+    <!-- <div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="company">
+                        <div class="heading">Class</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="12th" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+
+                    <div class="time-3">
+                        <div class="main-heading">Board</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Board</option>
+                            <option value="1">Rajasthan Board</option>
+                            <option value="2">CBSE</option>
+                            <option value="3">RBSE</option>
+                            <option value="4">DIPLOMA</option>
+                            <option value="5">National Open School</option>
+                        </select>
+                    </div>
+
+                     <div class="time-3">
+                        <div class="main-heading">Passing Out Year</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Year</option>
+                            <option value="1">2023</option>
+                            <option value="2">2022</option>
+                            <option value="3">2021</option>
+                            <option value="4">2020</option>
+                            <option value="5">2019</option>
+                        </select>
+                    </div>
+
+                    <div class="time-3">
+                        <div class="main-heading">School Medium</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Medium</option>
+                            <option value="1">Hindi</option>
+                            <option value="2">English</option>
+                            <option value="3">Bangali</option>
+                            <option value="4">Gujrati</option>
+                            <option value="5">Asomiya</option>
+                        </select>
+                    </div>
+
+                    <div class="time-3">
+                        <div class="main-heading">Total Marks</div>
+                        <select class="form-select main-1" aria-label="Default select example">
+                            <option selected>select Marks</option>
+                            <option value="1">40%</option>
+                            <option value="2">50%</option>
+                            <option value="3">60%</option>
+                            <option value="4">70%</option>
+                            <option value="5">80%</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class=" designation">
+                        <div class="heading">English Marks</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Marks Out (0-100)"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+
+                    <div class="Current-Salery">
+                        <div class="heading">Mathes Marks</div>
+                        <div class="input-group mb-3 inputbutton">
+                            <input type="text" class="form-control" placeholder="Marks Out (0-100)" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!--12-education-modal -->
+
+
+
+
+        <!--10-education-modal -->
+        <!-- <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+    
+    
+                        <div class="company">
+                            <div class="heading">Class</div>
+                            <div class="input-group mb-3 inputbutton">
+                                <input type="text" class="form-control" placeholder="10th" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+    
+    
+    
+                        <div class="time-3">
+                            <div class="main-heading">Board</div>
+                            <select class="form-select main-1" aria-label="Default select example">
+                                <option selected>select Board</option>
+                                <option value="1">Rajasthan Board</option>
+                                <option value="2">CBSE</option>
+                                <option value="3">RBSE</option>
+                                <option value="4">DIPLOMA</option>
+                                <option value="5">National Open School</option>
+                            </select>
+                        </div>
+    
+                         <div class="time-3">
+                            <div class="main-heading">Passing Out Year</div>
+                            <select class="form-select main-1" aria-label="Default select example">
+                                <option selected>select Year</option>
+                                <option value="1">2023</option>
+                                <option value="2">2022</option>
+                                <option value="3">2021</option>
+                                <option value="4">2020</option>
+                                <option value="5">2019</option>
+                            </select>
+                        </div>
+    
+                        <div class="time-3">
+                            <div class="main-heading">School Medium</div>
+                            <select class="form-select main-1" aria-label="Default select example">
+                                <option selected>select Medium</option>
+                                <option value="1">Hindi</option>
+                                <option value="2">English</option>
+                                <option value="3">Bangali</option>
+                                <option value="4">Gujrati</option>
+                                <option value="5">Asomiya</option>
+                            </select>
+                        </div>
+    
+                        <div class="time-3">
+                            <div class="main-heading">Total Marks</div>
+                            <select class="form-select main-1" aria-label="Default select example">
+                                <option selected>select Marks</option>
+                                <option value="1">40%</option>
+                                <option value="2">50%</option>
+                                <option value="3">60%</option>
+                                <option value="4">70%</option>
+                                <option value="5">80%</option>
+                            </select>
+                        </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--10-education-modal -->
+
+
+
+
+
+
+
+
+
+
+    <!-- pop-up for resume end -->
+    <!-- //Hero Section... -->
+    <!-- counter section -->
+
+    <!-- //blog section... -->
+    <!-- footer -->
+    {% comment %} {% include 'call4jobemp/base/footer.html' %} {% endcomment %}
+    <!-- //footer... -->
+    <!-- modal section -->
+   
+        <!-- //modal section... -->
+</body>
+
+
+</html>
+<script>
+    $(document).ready(function () {
+        $(".carousel-card-container").owlCarousel({
+            loop: true,
+            // margin: 10,
+            // nav: true,
+            // navText: [
+            //   "<i class='fa fa-caret-left'></i>",
+            //   "<i class='fa fa-caret-right'></i>"
+            // ],
+            autoplay: true,
+            autoplayHoverPause: true,
+            dots: false,
+            nav: false,
+            smartSpeed: 3000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                800:
+                {
+                    items: 3
+                },
+                1300: {
+                    items: 4
+                }
+            }
+        });
+    });
+    $(".search_icon").click(function () {
+        $(this).css({
+            "color": "transparent"
+        });
+        $(".search_bar").show();
+    });
+    $(".cross_icon").click(function () {
+        $(".search_bar").hide();
+        $(".search_icon").css({
+            "color": "#035E7B"
+        });
+    });
+
+
+
+    // experience dropdown section
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        ll = selElmnt.length;
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < ll; j++) {
+            /*for each option in the original select element,
+            create a new DIV that will act as an option item:*/
+            c = document.createElement("DIV");
+            c.innerHTML = selElmnt.options[j].innerHTML;
+            c.addEventListener("click", function (e) {
+                /*when an item is clicked, update the original select box,
+                and the selected item:*/
+                var y, i, k, s, h, sl, yl;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                sl = s.length;
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < sl; i++) {
+                    if (s.options[i].innerHTML == this.innerHTML) {
+                        s.selectedIndex = i;
+                        h.innerHTML = this.innerHTML;
+                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                        yl = y.length;
+                        for (k = 0; k < yl; k++) {
+                            y[k].removeAttribute("class");
+                        }
+                        this.setAttribute("class", "same-as-selected");
+                        break;
+                    }
+                }
+                h.click();
+            });
+            b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+            /*when the select box is clicked, close any other select boxes,
+            and open/close the current select box:*/
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+            if (elmnt == y[i]) {
+                arrNo.push(i)
+            } else {
+                y[i].classList.remove("select-arrow-active");
+            }
+        }
+        for (i = 0; i < xl; i++) {
+            if (arrNo.indexOf(i)) {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+
+//experience dropdown section...
+</script>
+<script>
+    function select_employement(params){
+            console.log(params)
+            // employed_checkbox
+              if (params=="yes"){
+
+                $('#Current-company').css("display","block")
+
+                $('#Leaving-date').css("display","none")
+                $('#Pervious-company').css("display","none")
+
+
+            }else{
+               
+            $('#Pervious-company').css("display","block")
+            $('#Current-company').css("display","none")
+            $('#Leaving-date').css("display","block")
+
+            
+            } 
+
+          
+            
+
+                      
+        // }else if(value=="no"){
+
+        //     $('#checked_checkbox').css("display","none")
+        //     $('#uncheck_checkbox').css("display","block")
+        //     $('#Pervious-company').css("display","block")
+        //     $('#Current-company').css("display","none")
+
+        // } 
+
+    }
+  </script>
+  <script>
+
+    function KeySkills(){
+        $('#Key_skiils').modal("show")
+
+    }
+  
+    function addSkillsInput(params){
+            
+        skillsList = $("#Keyskills").val()
+        
+        console.log(params)
+        console.log(skillsList,"skill aaaaaaaaaaaaaaa")
+        skillsList += params + ','
+        if(params){
+            $("#Keyskills").val(skillsList)
+        }
+
+    }
+    function KeySkillsSave(){
+
+        if(!$('#keyskillform').valid()){
+            return ;
+        } 
+        let slug = $("#slug").val()
+        console.log(slug,"slug")
+
+        let skills = $("#Keyskills").val()
+        console.log(skills,"aaaaaaaaaaaaaaaaaa")
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+
+        // console.log(skills, "aaaaaaaaaaaaaa")
+        $.ajax({
+            type: "POST",
+            url: "/profileSkillsSaveAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                skills:skills,
+            },
+       
+            success:function(res){
+                console.log(res);
+                // console.log('success');
+                toastr.success(res.message);
+               
+             
+                    $('#Key_skiils').modal("hide")
+
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    });
+    }
+    function it_Skills(){
+        $('#It_skiils').modal("show")
+
+    }
+    function addItSkillsInput(params){
+            
+            skillsList = $("#Itskills").val()
+            
+            console.log(params)
+            console.log(skillsList,"skill")
+            skillsList += params + ','
+            if(params){
+                $("#Itskills").val(skillsList)
+            }
+    
+        }
+        function ItSkillsSave(){
+            if(!$('#Itskillform').valid()){
+            return ;
+        } 
+        let slug = $("#slug").val()
+        console.log(slug,"slug")
+
+        let itskills = $("#Itskills").val()
+        console.log(itskills,"aaaaaaaaaaaaaaaaaa")
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+
+        // console.log(skills, "aaaaaaaaaaaaaa")
+        $.ajax({
+            type: "POST",
+            url: "/profileItSkillsSaveAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                itskills:itskills,
+            },
+       
+            success:function(res){
+                console.log(res);
+                // console.log('success');
+                toastr.success(res.message);
+               
+             
+                    $('#It_skiils').modal("hide")
+
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    });
+        }
+       
+
+  </script>
+  <script>
+    function employement(){
+        $("#employementid").modal("show")
+        
+    }
+    function employementUpdate(){
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        let current_emp= $('input[name=employed_checkbox]:checked').val()
+        console.log(current_emp,"wwwwwwwwwwwwwwwww")
+        let emp_type= $('input[name=employment_type_checkbox]:checked').val()
+        console.log(emp_type)
+       
+        let slug = $("#slug").val()
+        console.log(slug)
+
+        let year = $("#year").val()
+        console.log(year)
+
+        let month = $("#month").val()
+        console.log(month)
+
+        let Currentcompany = $("#current-company").val()
+        console.log(Currentcompany)
+
+        let Previouscompany = $("#pervious-company").val()
+        console.log(Previouscompany)
+
+        let designation = $("#designation").val()
+        console.log(designation)
+
+        let key_skills = $("#key_skills").val()
+        console.log(key_skills)
+
+      
+        let joiningdate = $("#join-date").val()
+        console.log(joiningdate)
+
+        let leaveingdate = $("#leave-date").val()
+        console.log(leaveingdate)
+      
+        let skills_used = $("#skill-used").val()
+        console.log(skills_used)
+
+        let salary = $("#salary").val()
+        console.log(salary)
+
+        let noticeperiod = $("#notice-period").val()
+        console.log(noticeperiod)
+        if (current_emp == 'yes'){
+            $.ajax({
+            type: "POST",
+            url: "/updateEmployementAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                employed_type:current_emp,
+                year:year,
+                month:month,
+                Currentcompany:Currentcompany,
+                // Previouscompany:Previouscompany,
+                designation:designation,
+                key_skills:key_skills,
+                work_type:emp_type,
+                joiningdate:joiningdate,
+                // leaveingdate:leaveingdate,
+                salary:salary,
+                noticeperiod:noticeperiod,
+                skills_used:skills_used
+            },
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                $("#employementid").modal("hide")
+               
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    });
+        
+        }else{
+            $.ajax({
+            type: "POST",
+            url: "/updateEmployementAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                employed_type:current_emp,
+                year:year,
+                month:month,
+                // Currentcompany:Currentcompany,
+                Previouscompany:Previouscompany,
+                designation:designation,
+                key_skills:key_skills,
+                work_type:emp_type,
+                joiningdate:joiningdate,
+                leaveingdate:leaveingdate,
+                salary:salary,
+                noticeperiod:noticeperiod,
+                skills_used:skills_used
+            },
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                $("#employementid").modal("hide")
+
+               
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    }); 
+        }
+        // var data =  new FormData();
+        // data.append("name", name)
+        // data.append("email", email)
+        // data.append("number", number)
+        // data.append("work_status", work_status)
+        // data.append("password", password)
+        // data.append("address", address)
+        // data.append("gender", select_gender)
+        // data.append("dob", dob)
+
+        // data.append("resume", resume)  
+       
+    }
+    
+  </script>
+  <script>
+    function AddUserDetails(){
+        $('#BasicDetails').modal('show')
+    }
+    function BasicDetailsSave(){
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let slug = $('#slug').val()
+
+        let first_name = $('#fname').val()
+        console.log(first_name);
+        let last_name = $('#lname').val()
+        console.log(last_name);
+
+        let mobile_num = $('#mobile_num').val()
+        console.log(mobile_num);
+
+        let email = $('#email').val()
+        console.log(email);
+
+        let location = $('#add_location').val()
+        console.log(location);
+
+        let abilityjoin = $('#abilityjoin').val()
+        console.log(abilityjoin);
+
+        let workstatus= $('#workstatus').val()
+        console.log(workstatus);
+
+        $.ajax({
+            type: "POST",
+            url: "/UpdateBasicDetailsAjax/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            
+            data:{
+                first_name:first_name,
+                last_name:last_name,
+                mobile_num:mobile_num,
+                email:email,
+                location:location,
+                abilityjoin:abilityjoin,
+                workstatus:workstatus,
+                
+            },
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                $("#BasicDetails").modal("hide")
+                $("#BasicForm").submit()
+
+               
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    }); 
+
+    }
+  </script>
+  <script>
+    
+    $(document).ready(function() {
+    $("#user-profile-input").change(function() {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var slug = $('#slug').val();
+        let resume = document.getElementById("user-profile-input").files[0]
+
+        // var resume = $(this).val();
+        console.log(resume);
+        var data =  new FormData();
+        data.append("resume", resume)
+        $.ajax({
+            type: "POST",
+            url: "/resumeUpload/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            dataType:"json",
+            processData:false,
+            contentType:false,
+            data:data,
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                
+
+               
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    }); 
+        // $("#imagePreview").html(src ? "<img src='" + src + "'>" : "");
+    });
+});
+
+  </script>
+
+<script>
+    
+    $(document).ready(function() {
+    $("#user-profileimage-input").change(function() {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var slug = $('#slug').val();
+        let image = document.getElementById("user-profileimage-input").files[0]
+
+        // var image = $(this).val();
+        console.log(image);
+        var data =  new FormData();
+        data.append("image", image)
+        $.ajax({
+            type: "POST",
+            url: "/imgUpload/"+ slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            dataType:"json",
+            processData:false,
+            contentType:false,
+            data:data,
+       
+            success:function(res){
+                console.log(res.message);
+                console.log('success');
+                toastr.success(res.message);
+                
+
+                location.reload(true);
+
+             
+            
+            },
+          error:function(res){
+            console.log(res)
+            toastr.error(res.responseJSON.message);
+    
+          }
+    }); 
+        // $("#imagePreview").html(src ? "<img src='" + src + "'>" : "");
+    });
+});
+
+  </script>
+{% endblock body %}

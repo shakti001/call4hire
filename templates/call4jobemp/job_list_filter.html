@@ -1,0 +1,702 @@
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@700&display=swap");
+
+    .range-slider {
+        position: relative;
+        width: 100%;
+        height: 10vmin;
+    }
+
+    .range-slider_input {
+        width: 100%;
+        position: relative;
+        top: 50%;
+        z-index: 3;
+        transform: translateY(-50%);
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 30px;
+        opacity: 0;
+        margin: 0;
+    }
+
+    .range-slider_input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 4px;
+        height: 4px;
+        cursor: pointer;
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .range-slider_input::-moz-range-thumb {
+        width: 4vmin;
+        height: 4vmin;
+        cursor: pointer;
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .range-slider_thumb {
+        border: 2px solid #035E7B;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        font-size: 16px;
+        color: #035E7B;
+        z-index: 2;
+    }
+
+    .range-slider_line {
+        height: 0.5vmin;
+        width: 100%;
+        background-color: #e1e1e1;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        position: absolute;
+        z-index: 1;
+        cursor: pointer;
+    }
+    location
+    .range-slider_line-fill {
+        position: absolute;
+        height: 0.5vmin;
+        width: 0;
+        background-color: #303030;
+    }
+
+
+  
+
+</style>
+
+{% comment %} <div class="xl:w-1/5 lg:w-1/2 w-full h-fit bg-blue-100/60 text-[#5a5a5a] p-4 rounded-xl">
+    <h4 class="border-b border-[#5a5a5a] text-[#035E7B] py-2 text-xl font-bold">All Filters</h4>
+    <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Work mode</h4>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Work from office(20237)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Remote / WFH(463)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Hybrid(335)</h3>
+        </div>
+        <div class="flex items-center pt-1 border-b border-[#5a5a5a] pb-2">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">WFH due to covid(118)</h3>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Experience</h4>
+        </div>
+        <div class="border-b border-[#5a5a5a] pb-2">
+            <div class="range-slider">
+                <div id="slider_thumb" class="range-slider_thumb w-8 h-8"></div>
+                <div class="range-slider_line">
+                    <div id="slider_line" class="range-slider_line-fill"></div>
+                </div>
+                <input id="slider_input" class="range-slider_input" type="range" min="0" max="30"
+                    value="0">
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Department</h4>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Engineering</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Sales & Business De...</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Customer Success, S...</h3>
+        </div>
+        <div class="flex items-center pt-1 ">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">UX, Design & Archi...</h3>
+        </div>
+        <div class="border-b border-[#5a5a5a] pb-2">
+            <a class="font-semibold text-[#035E7B]" href="">View More</a>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Work mode</h4>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Work from office(20237)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Remote / WFH(463)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Hybrid(335)</h3>
+        </div>
+        <div class="flex items-center pt-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">WFH due to covid(118)</h3>
+        </div>
+        <div class="border-b border-[#5a5a5a] pb-2">
+            <a class="font-semibold text-[#035E7B]" href="">View More</a>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Work mode</h4>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Work from office(20237)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Remote / WFH(463)</h3>
+        </div>
+        <div class="flex items-center py-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">Hybrid(335)</h3>
+        </div>
+        <div class="flex items-center pt-1">
+            <input class="mr-4" type="checkbox">
+            <h3 class="">WFH due to covid(118)</h3>
+        </div>
+        <div class="border-b border-[#5a5a5a] pb-2">
+            <a class="font-semibold text-[#035E7B]" href="">View More</a>
+        </div>
+    </div>
+    <!-- <div class="">
+        <div class="flex items-center justify-between py-2">
+            <h4 class="font-semibold">Experience</h4>
+        </div>
+        <div class="border-b border-[#5a5a5a] pb-2">
+            <div class="range-slider">
+                <div id="slider_thumb" class="range-slider_thumb w-8 h-8"></div>
+                <div class="range-slider_line">
+                    <div id="slider_line" class="range-slider_line-fill"></div>
+                </div>
+                <input id="slider_input" class="range-slider_input" type="range" min="0" max="30"
+                    value="0">
+            </div>
+        </div>
+    </div> -->
+    <div class="">
+        <div class="flex items-center justify-between pt-2">
+            <h4 class="font-semibold">Work mode</h4>
+            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent" id="cars">
+                <option value="" disabled selected hidden>Select</option>
+                <option value="Frasher" default>Frasher</option>
+                <option value="1 year">1 year</option>
+                <option value="2 year">2 year</option>
+            </select>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- <div class="col-xl-3 col-lg-3 col-md-4">
+    <div class="row">
+        <div class="col-12">
+                <div class="small-section-tittle2 mb-45">
+                <div class="ion"> <svg 
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="20px" height="12px">
+                <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
+                    d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
+                </svg>
+                </div>
+                <h4>Filter Jobs</h4>
+            </div>
+        </div>
+    </div>
+    <form method="POST">
+         {% csrf_token %}
+        <div class="job-category-listing mb-50">
+            <div class="single-listing">
+            <div class="small-section-tittle2">
+                    <h4>Job Category</h4>
+            </div>
+                <div class="select-job-items2">
+                    <select name="select" id="job_category" onchange="selectJobcategory()">
+                        <option value="">All Category</option>
+                    {% for i in job_category %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="select-Categories pt-80 pb-50">
+                    <div class="small-section-tittle2">
+                        <h4>Job Type</h4>
+                    </div>
+                    <label class="container">Full Time
+                        <input id="fulltime"  checked onchange="selectJobcategory()" value="Fulltime" type="checkbox" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Part Time
+                        <input id="parttime"  onchange="selectJobcategory()" value="Parttime" type="checkbox" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Contract
+                        <input id="contract"  onchange="selectJobcategory()" value="Contract" type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                
+                </div>
+            </div>
+            <div class="single-listing">
+            <div class="small-section-tittle2">
+                    <h4>Job Location</h4>
+            </div>
+                <div class="select-job-items2">
+                    <select name="select" onchange="selectJobcategory()" id="job_location">
+                        <option value="Delhi">Delhi </option>
+                        <option value="Jaipur">Jaipur</option>
+                        <option value="Bangluru">Bangluru  </option>
+                        <option value="Udaipur">Udaipur </option>
+                        <option value="Pune">Pune </option>
+                        
+                    </select>
+                </div>
+              
+                <div class="select-Categories pt-80 pb-50">
+                    <div class="small-section-tittle2">
+                        <h4>Experience</h4>
+                    </div>
+                    <label class="container">1-2 Years
+                        <input type="checkbox" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">2-3 Years
+                        <input type="checkbox" checked="checked active">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">3-6 Years
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">6-more..
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        
+            <div class="single-listing">
+                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+                    <div class="small-section-tittle2">
+                        <h4>Filter Jobs</h4>
+                    </div>
+                    <div class="widgets_inner">
+                        <div class="range_item">
+                            <input type="text" class="js-range-slider" value="" />
+                            <div class="d-flex align-items-center">
+                                <div class="price_text">
+                                    <p>Price :</p>
+                                </div>
+                                <div class="price_value d-flex justify-content-center">
+                                    <input type="text" class="js-input-from" id="amount" readonly />
+                                    <span>to</span>
+                                    <input type="text" class="js-input-to" id="amount" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+    <div class="xl:w-1/5 lg:w-1/3 w-full h-fit bg-blue-100/60 text-[#5a5a5a] p-4 rounded-xl">
+        <h4 class="border-b border-[#5a5a5a] text-[#035E7B] py-2 text-xl font-bold">All Filters</h4>
+        <form method="POST">
+            {% csrf_token %}
+        {% comment %} <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Job Category</h4>
+            </div>
+            {% for i in job_category %}
+                <div class="flex items-center py-1">
+                    <input  class="mr-4"  value="{{i.id}}" onchange="selectJobcategory({{i.id}})" id="job_category_{{i.id}}" type="checkbox">
+                    <h3 class="">{{i.name}}</h3>
+                </div>
+            {% endfor %}
+          
+        </div> {% endcomment %}
+        <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Job Category</h4>
+            </div>
+            <select id="job_category" onchange="selectJobchecks('category')"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 location">
+                <option disabled selected >Category </option>
+                {% for i in job_category %}
+                    <option  value="{{i.id}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Experience</h4>
+            </div>
+            <div class="border-b border-[#5a5a5a] pb-2">
+                <div class="range-slider">
+                    <div id="slider_thumb" class="range-slider_thumb w-8 h-8"></div>
+                    <div class="range-slider_line">
+                        <div id="slider_line" class="range-slider_line-fill"></div>
+                    </div>
+                    <input id="slider_input" onchange="selectJobchecks('exp')" id="exp" class="range-slider_input" type="range" min="0" max="30"
+                        value="0">
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Work mode</h4>
+            </div>
+            <div class="flex items-center py-1">
+                <input checked onchange="selectJobchecks('fulltime')" id="fulltime" class="mr-4" value="fulltime" type="checkbox">
+                <h3 class="fulltime">Full Time</h3>
+            </div>
+            <div class="flex items-center py-1">
+                <input onchange="selectJobchecks('parttime')"  id="parttime" value="parttime" class="mr-4" type="checkbox">
+                <h3 class="parttime">Part Time</h3>
+            </div>
+            <div class="flex items-center py-1">
+                <input onchange="selectJobchecks('contract')"  id="contract" value="contract" class="mr-4" type="checkbox">
+                <h3 class="contract">Contract</h3>
+            </div>
+           
+            <div class="border-b border-[#5a5a5a] pb-2">
+                <a class="font-semibold text-[#035E7B]" href="">View More</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Job location</h4>
+            </div>
+            <select onchange="selectJobchecks('location')"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 location">
+                <option disabled selected >location </option>
+               
+                <option  value="Jaipur">Jaipur</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Pune">Pune</option>
+                <option value="Bangluru">Bangluru</option>
+                <option value="Noida">Noida</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Mohali">Mohali</option>
+                <option value="Gurgaon">Gurgaon</option>
+            </select>
+           {% comment %} <div class="flex items-center justify-between pt-2">
+                <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select  onchange="selectJobcategory('location')">
+                      <option value="Jaipur">Jaipur</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Pune">Pune</option>
+                      <option value="Bangluru">Bangluru</option>
+                      <option value="Noida">Noida</option>
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Mohali">Mohali</option>
+                      <option value="Gurgaon">Gurgaon</option>
+                    </select>
+                  </div>
+            </div>  {% endcomment %}
+        </div>
+        <div class="">
+            <div class="flex items-center justify-between py-2">
+                <h4 class="font-semibold">Salary </h4>
+            </div>
+            {% comment %} <div class="flex items-center py-1">
+                <input checked onchange="selectJobchecks('Fresher')" id="Fresher" checked class="mr-4" value="fresher" type="checkbox">
+                <h3 class="fulltime">Fresher</h3>
+            </div> {% endcomment %}
+            <div class="flex items-center py-1">
+                <input checked onchange="selectJobchecks(0)"  id="0lpa" value="0" class="mr-4" type="checkbox">
+                <h3 class="parttime">0 LPA - 5 LPA</h3>
+            </div>
+            <div class="flex items-center py-1">
+                <input onchange="selectJobchecks(5)"  id="5lpa" value="5" class="mr-4" type="checkbox">
+                <h3 class="contract">5 LPA - 10 LPA</h3>
+            </div>
+            <div class="flex items-center py-1">
+                <input onchange="selectJobchecks(10)"  id="10lpa" value="10" class="mr-4" type="checkbox">
+                <h3 class="contract">10 LPA - 15 LPA</h3>
+            </div>
+            <div class="flex items-center py-1">
+                <input onchange="selectJobchecks(15)"  id="10lpa" value="10" class="mr-4" type="checkbox">
+                <h3 class="contract">15 LPA - 20+ LPA</h3>
+            </div>
+           
+            <div class="border-b border-[#5a5a5a] pb-2">
+                <a class="font-semibold text-[#035E7B]" href="">View More</a>
+            </div>
+        </div>
+        
+    </form>
+    </div>
+
+<script>
+    const slider_input = document.getElementById('slider_input'),
+        slider_thumb = document.getElementById('slider_thumb'),
+        slider_line = document.getElementById('slider_line');
+
+    function showSliderValue() {
+        slider_thumb.innerHTML = slider_input.value;
+        const bulletPosition = (slider_input.value / slider_input.max),
+            space = slider_input.offsetWidth - slider_thumb.offsetWidth;
+
+        slider_thumb.style.left = (bulletPosition * space) + 'px';
+    }
+
+    showSliderValue();
+    window.addEventListener("resize", showSliderValue);
+    slider_input.addEventListener('input', showSliderValue, false);
+
+</script>
+
+<script>
+    function selectJobchecks(params){
+      
+        job_type_list=[]
+        salary_list=[]
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let job_category = $("#job_category").val()
+        
+        let location = $(".location").val()
+        let exp =$('.range-slider_input').val()
+       
+        let job_type = $("#fulltime:checked").val()
+        let job_type2 = $("#parttime:checked").val()
+        let job_type3 = $("#contract:checked").val()
+        let Salary1 = $("#Fresher:checked").val()
+
+        let Salary2 = $("#0lpa:checked").val()
+        let Salary3 = $("#5lpa:checked").val()
+        let Salary4 = $("#10lpa:checked").val()
+        if (Salary1){
+            salary_list.push(Salary1)
+        }if(Salary2){
+            salary_list.push(Salary2)
+        }if(Salary3){
+            salary_list.push(Salary3)
+
+        }if(Salary4){
+            salary_list.push(Salary4)
+
+        }
+        console.log(salary_list)
+        if (job_type){
+            job_type_list.push(job_type)
+        }if(job_type2){
+            job_type_list.push(job_type2)
+        }if(job_type3){
+            job_type_list.push(job_type3)
+
+        }
+ 
+        console.log(job_type_list)
+        console.log(location)
+        console.log(exp)
+            $.ajax({
+                type: "POST",
+                url: "/find-job/",
+                headers: { 'X-CSRFToken': csrftoken },
+                
+                data:{
+                    exp:exp,
+                    location:location,
+                    "job_type_list[]":job_type_list,
+                    job_category:job_category,
+                    "salary_list[]":salary_list,
+
+
+                    
+                },
+        
+                success:function(res){
+                    
+                    if(res){
+                        $('#job_count_div').css("display", "none")
+                        $('#select_filter').html(res)
+                    }
+                
+                },
+                error:function(res){
+                    console.log(res)
+                    toastr.error(res.responseJSON.message);
+    
+                }
+        
+            });
+        }
+        
+            
+
+       
+        
+        
+        
+        
+
+        
+
+        
+    
+        {% comment %} var job_type_list = [];  
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let job_type = $("#fulltime:checked").val()
+        let job_type2 = $("#parttime:checked").val()
+        let job_type3 = $("#contract:checked").val()
+        let job_location = $("#job_location").val()
+        if (job_type){
+            job_type_list.push(job_type)
+        }if(job_type2){
+            job_type_list.push(job_type2)
+        }if(job_type3){
+            job_type_list.push(job_type3)
+
+        }
+       
+        if typeof(id) == "number"{
+           
+            let job_cat =  $('#job_category_'+id).val()
+            $.ajax({
+                type: "POST",
+                url: "/find-job/",
+                headers: { 'X-CSRFToken': csrftoken },
+                
+                data:{
+                    job_cat:job_cat,
+                    
+                },
+        
+                success:function(res){
+                    if(res){
+                      
+                        $('#job_count_div').css("display", "none")
+    
+                        $('#select_filter').html(res)
+                    }
+                
+                },
+                error:function(res){
+                    console.log(res)
+                    toastr.error(res.responseJSON.message);
+    
+                }
+        
+            });
+
+        } 
+    } {% endcomment %}
+</script>
+ {% comment %} <script>
+    // location dropdown section
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+      selElmnt = x[i].getElementsByTagName("select")[0];
+      ll = selElmnt.length;
+      /*for each element, create a new DIV that will act as the selected item:*/
+      a = document.createElement("DIV");
+      a.setAttribute("class", "select-selected");
+      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      x[i].appendChild(a);
+      /*for each element, create a new DIV that will contain the option list:*/
+      b = document.createElement("DIV");
+      b.setAttribute("class", "select-items select-hide");
+      for (j = 1; j < ll; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+              }
+            }
+            h.click();
+        });
+        b.appendChild(c);
+      }
+      x[i].appendChild(b);
+      a.addEventListener("click", function(e) {
+          /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+      /*a function that will close all select boxes in the document,
+      except the current select box:*/
+      var x, y, i, xl, yl, arrNo = [];
+      x = document.getElementsByClassName("select-items");
+      y = document.getElementsByClassName("select-selected");
+      xl = x.length;
+      yl = y.length;
+      for (i = 0; i < yl; i++) {
+        if (elmnt == y[i]) {
+          arrNo.push(i)
+        } else {
+          y[i].classList.remove("select-arrow-active");
+        }
+      }
+      for (i = 0; i < xl; i++) {
+        if (arrNo.indexOf(i)) {
+          x[i].classList.add("select-hide");
+        }
+      }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+     
+    //location dropdown section...
+</script>  {% endcomment %}

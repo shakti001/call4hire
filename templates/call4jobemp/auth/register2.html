@@ -1,0 +1,603 @@
+{% extends 'call4jobemp/base/base.html'%}
+{% load static %}
+
+{% block body %}
+<style>
+    .error{
+        color:red;
+        font-size:11px;
+        padding-bottom: 3px;
+        margin:0px 8px;
+        font-weight:300;
+    }
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    section {
+        position: relative;
+        background-color: #035e7b38;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10em 20px 5em 20px;
+    }
+
+    section .container {
+        position: relative;
+        width: 800px;
+        height:650px;
+        background: #fff;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    section .container .user {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    section .container .user .formBx {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        padding: 40px;
+        transition: 0.5s;
+        justify-content: center;
+        align-items: center;
+    }
+
+    section .container .user .formBx form h2 {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    section .container .user .formBx form .btn {
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        background: #f5f5f5;
+        color: #333;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        margin: 8px 8px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: 300;
+        cursor: pointer;
+    }
+
+    section .container .user .formBx form .field {
+        background: #ffffff;
+        cursor: context-menu;
+    }
+
+    section .container .user .formBx form .select {
+        width: 47%;
+    }
+    section .container .user .formBx form .input_container
+    {
+        position: relative;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: left;
+    }
+    section .container .user .formBx form .submit_btn {
+        max-width: 100px;
+        background: #035E7B;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: 0.5s;
+    }
+
+    section .container .user .formBx form .signup {
+        position: relative;
+        margin-top: 20px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #555;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    section .container .user .formBx form .signup a {
+        font-weight: 600;
+        text-decoration: none;
+        color: #035E7B;
+    }
+
+    @media (max-width: 991px) {
+        section .container .imgBx {
+            display: none;
+        }
+
+        section .container .user .formBx {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        section .container {
+            height: 1150px;
+        }
+
+        section .container .user .formBx form .input {
+            width: 100%;
+        }
+
+        section .container .user .formBx form .select {
+            width: 100%;
+        }
+    }
+
+
+    /* toggle button css */
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px;
+        height: 20px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #9bc8d9;
+        outline: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border: 1px solid #cfcfcf;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+    }
+
+    input[type="checkbox"]:checked::before {
+        transform: translateX(100%);
+        background: #fff;
+    }
+
+    input[type="checkbox"]:checked {
+        background: #00ed64;
+    }
+
+    /* toggle button css ends */
+</style>
+
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+  <!--  header Start -->
+  {% include 'call4jobemp/base/header.html' %}
+  <!-- header end -->
+  
+
+        <!-- Hero Area End -->
+    <!-- ================ contact section start ================= -->
+    <!-- <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="contact-title">Register as employee</h2>
+                </div>
+                <div class="col-lg-12">
+                    <form class="form-contact contact_form" method="POST" id="SignForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label><B>Full Name</B></label>
+                                <div class="form-group">
+                                    <input class="form-control "  data-rule-required="true" name="name" id="fname" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your Full Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Email</B></label>
+
+                                <div class="form-group">
+                                    <input class="form-control " data-rule-required="true" name="email" id="emails" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Mobile Number</B></label>
+
+                                <div class="form-group">
+                                    <input class="form-control " oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" data-rule-required="true" maxlength="10" minlength="10" data-msg-minLength="Please enter a valid mobile number" name="number" id="numbers" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Mobile Number'" placeholder="Enter your Mobile Number">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Address</B></label>
+                                <div class="form-group">
+                                    <input class="form-control " data-rule-required="true" name="address" id="address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your address'" placeholder="Enter your address">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Date of birth</B></label>
+                                <div class="form-group">
+                                    <input class="form-control " data-rule-required="true" name="dob" id="dob" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label><B>Gender</B></label>
+
+                                    <select name="select_gender" id="select_gender" class="form-select"  data-rule-required="true" >
+                                        <option selected disabled >select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                <label><B>Work status</B></label>
+
+                                    <select name="work_status" id="work_status" class="form-select"  data-rule-required="true" >
+                                        <option selected disabled >Work Status</option>
+                                        <option value="Experienced">Experienced</option>
+                                        <option value="Fresher">Fresher</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label><B>Password</B></label>
+                                <div class="form-group">
+                                    <input data-rule-PASSWORD="true" class="form-control" data-rule-required="true" name="password" id="password"  type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Password'" placeholder="Enter your Password">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label><B>Upload Resume</B></label>
+
+                                <div class="form-group">
+                                   <input  class="form-control" data-rule-required="true" name="resume" accept="application/pdf,application/vnd.ms-excel" id="resume" type="file" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Upload Resume'" placeholder="Uplad Your Resume">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" onclick="sendMessage()" class="button button-contactForm boxed-btn" style="padding:10px;">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    
+
+
+    <section>
+        <div class="container box">
+            <!-- signin box -->
+            <div class="user signinBx">
+                <div class="formBx">
+                    <form action="" method="POST" id="SignForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2>Create an account as EmployeeSCscssgascgv</h2>
+                        <div class="flex flex-wrap justify-center mb-[10px] register-table">
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" type="text" name="name" id="fname" placeholder="Full Name"  /></div>
+							<!-- <label class="custom-control-label" for="fname"></label> -->
+                            <div class="flex flex-col select input_container"><input data-rule-required="true"class="btn" type="email" name="email" id="emails" placeholder="Email Id" /></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true"class="btn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" data-rule-required="true" maxlength="10" minlength="10" data-msg-minLength="Please enter a valid mobile number" name="number" id="numbers" type="text"  placeholder="Mobile Number" /></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true"class="btn" type="text" data-rule-required="true" name="address" id="address" placeholder="Address" /></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" type="text" id="dob" placeholder="Date of Birth"
+                                onfocus="(this.type='date')"></div>
+                                <!-- <label class="custom-control-label" for="dob"></label> -->
+                            <div class="flex flex-col select input_container register-select"><select data-rule-required="true"  style="text-align: left;" name="select_gender" id="select_gender" class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn" >
+                                <option value="" disabled selected hidden>Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select></div>
+                            <div class="flex flex-col select input_container register-select"><select data-rule-required="true"  style="text-align: left;" name="work_status" id="work_status"  class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent btn">
+                                <option value="" disabled selected hidden>Work Status</option>
+                                <option value="Experienced">Experienced</option>
+                                <option value="Fresher">Fresher</option>
+                            </select></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" data-rule-PASSWORD="true" data-rule-required="true" name="password" id="password"  type="password" class="btn" type="password" placeholder="Password" /></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" data-rule-PASSWORD="true" data-rule-required="true" name="cpassword" id="cpassword"  type="password"  class="btn" type="password"  placeholder="Confirm Password" /></div>
+                            <div class="flex flex-col select input_container"><input data-rule-required="true" class="btn" data-rule-required="true" name="resume" accept="application/pdf,application/vnd.ms-excel" id="resume" type="file"  placeholder="Submit"
+                            ></div>
+                        </div>
+                        <button onclick="sendMessage()" class="btn submit_btn custom-button" type="button" >continue</button>
+                        <p class="signup">
+                            Already have an account ?
+                            <a href="/login/">Sign in.</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- //signin box ends... -->
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- <section>
+        <div class="container box">
+            <div class="user signinBx">
+                <div class="formBx">
+                    <form action="" method="POST" id="SignForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2>Create an account as Employee</h2>
+                        <div class="flex flex-wrap justify-center mb-[10px]">
+                            <input data-rule-required="true" class="select btn" type="text" name="name" id="fname" placeholder="Full Name" />
+                            <input data-rule-required="true"class="select btn" type="email" name="email" id="email" placeholder="Email Id" />
+                            <input data-rule-required="true"class="select btn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" data-rule-required="true" maxlength="10" minlength="10" data-msg-minLength="Please enter a valid mobile number" name="number" id="numbers" type="text"  placeholder="Mobile Number" />
+                            <input data-rule-required="true"class="select btn" type="text" data-rule-required="true" name="address" id="address" placeholder="Address" />
+                            <input data-rule-required="true" class="select btn" type="text" placeholder="Date of Birth"
+                                onfocus="(this.type='date')">
+                            <select data-rule-required="true" name="select_gender" id="select_gender" class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn">
+                                <option value="" disabled selected hidden>Gender</option>
+                                <option value="">Male</option>
+                                <option value="">Female</option>
+                                <option value="">Other</option>
+                            </select>
+                            <select data-rule-required="true" name="work_status" id="work_status"  class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Work Status</option>
+                                <option value="">Experienced</option>
+                                <option value="">Fresher</option>
+                            </select>
+                            <input data-rule-required="true" data-rule-PASSWORD="true" data-rule-required="true" name="password" id="password"  type="password" class="select btn" type="password" placeholder="Password" />
+                            <input data-rule-required="true" data-rule-PASSWORD="true" data-rule-required="true" name="cpassword" id="cpassword"  type="password"  class="select btn" type="password"  placeholder="Confirm Password" />
+                            <input data-rule-required="true" class="select btn" data-rule-required="true" name="resume" accept="application/pdf,application/vnd.ms-excel" id="resume" type="file"  placeholder="Upload Resume"
+                                onfocus="(this.type='file')">
+                        </div>
+                        <button onclick="sendMessage()" class="btn submit_btn" type="submit" >continue</button>
+                        <p class="signup">
+                            Already have an account ?
+                            <a href="./Employee login.html">Sign in.</a>
+                        </p>
+                    </form>
+                </div>
+            </div> -->
+            <!-- //signin box ends... -->
+            <!-- signup box -->
+            <!-- <div class="user signupBx">
+                <div class="formBx flex flex-col items-start justify-center">
+                    <form action="" onsubmit="return false;">
+                        <h2>Create an account as Employee</h2>
+                        <div class="flex flex-wrap justify-center mb-[10px]">
+                            <div class="select btn field flex items-center justify-between">
+                                <input type="checkbox">
+                                <span class="">Are you currently employed?</span>
+                            </div>
+                            <div class="select btn field flex flex-col items-start justify-between bg-white">
+                                <span class="">Total Work Experienced</span>
+                                <div class="flex lg:flex-row flex-col" style="width: 100%;">
+                                    <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn"
+                                        id="cars">
+                                        <option value="" disabled selected hidden>Select Year</option>
+                                        <option value="">1 year</option>
+                                        <option value="">2 year</option>
+                                        <option value="">3 year</option>
+                                        <option value="">4 year</option>
+                                        <option value="">5 year</option>
+                                        <option value="">6 year</option>
+                                        <option value="">7 year</option>
+                                        <option value="">8 year</option>
+                                        <option value="">9 year</option>
+                                        <option value="">10 year</option>
+                                        <option value="">10+ year</option>
+                                    </select>
+                                    <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn"
+                                        id="cars">
+                                        <option value="" disabled selected hidden>Select Month</option>
+                                        <option value="">1 month</option>
+                                        <option value="">2 month</option>
+                                        <option value="">3 month</option>
+                                        <option value="">4 month</option>
+                                        <option value="">5 month</option>
+                                        <option value="">6 month</option>
+                                        <option value="">7 month</option>
+                                        <option value="">8 month</option>
+                                        <option value="">9 month</option>
+                                        <option value="">10 month</option>
+                                        <option value="">11 month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input class="select btn" type="text" name="" placeholder="Current Company Name" />
+                            <input class="select btn" type="text" name="" placeholder="Designation" />
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Work Type</option>
+                                <option value="">Full time </option>
+                                <option value="">Part time </option>
+                                <option value="">contract</option>
+                            </select>
+                            <input class="select btn" type="text" placeholder="Joining date"
+                                onfocus="(this.type='date')">
+                            <input class="select btn" type="text" name="" placeholder="Current Salary" />
+                            <select class="border-0 text-[#5a5a5a] focus:ring-0 bg-transparent select btn" id="cars">
+                                <option value="" disabled selected hidden>Select notice period </option>
+                                <option value="Frasher" default>15 days</option>
+                                <option value="">1 Month</option>
+                                <option value="">2 Month</option>
+                                <option value="">2+ Month</option>
+                            </select>
+                            <textarea class="btn" name="" id="" cols="30" rows="10"
+                                placeholder="Add key skills"></textarea>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div onclick="toggleForm();" class="flex items-center justify-center btn submit_btn">
+                                Back
+                            </div>
+                            <a class="btn submit_btn" href="./Employee login.html">continue</a>
+                        </div>
+                        <p class="signup">
+                            Already have an account ?
+                            <a href="./Employee login.html">Sign in.</a>
+                        </p>
+                    </form>
+                </div>
+            </div> -->
+            <!-- //signup box ends... -->
+        </div>
+    </section>
+  {% include 'call4jobemp/base/footer.html' %}
+  {% block script %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rt8OKhZ-8_Fv_OjiSA0n1NC1M6TAN94&callback=initMap&libraries=places&v=weekly" async></script>
+
+  <script>
+      function initMap()
+      {
+        var input = document.getElementById('address');
+        var options =     {
+                types: ['geocode']
+                
+            
+            };
+          var input= document.getElementById('address')
+          autocomplete = new google.maps.places.Autocomplete(input, options);
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+          var place = autocomplete.getPlace();
+          
+         
+         
+        
+              //alert("This function is working!");
+              //alert(place.name);
+             // alert(place.address_components[0].long_name);
+  
+          });
+         //var                    <input data-rule-required="true" data-rule-PASSWORD="true" data-rule-required="true" name="cpassword" id="cpassword"  type="password"  class="select btn" type="password"  placeholder="Confirm Password" />
+         place = autocomplete.getPlace();
+          //console.log(autocomplete ,'dddddd')
+          //document.getElementById('autocom').value = place.geometry.location.lat();
+  
+      }
+      
+     
+  </script>
+  <script>
+ function sendMessage(){
+    $.validator.addMethod("PASSWORD", function (value, element) {
+                  return /[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(value) && /[a-z]/.test(value) && /[0-9]/.test(value) && /[A-Z]/.test(value);
+                }, "Passwords are 8-16 characters with uppercase letters, lowercase letters and atleast one number and one special character.");
+    
+    jQuery.validator.addMethod("noSpace", function(value, element) { 
+    if(value.indexOf(" ")==0){
+        return false;
+    }
+    return true;
+        }, "No space please and don't leave it empty");
+
+
+    if(!$('#SignForm').valid()){
+        return ;
+    } 
+    
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let name = $('#fname').val();
+    let email = $('#emails').val();
+    let number = $('#numbers').val();
+    let work_status = $('#work_status').val();
+    let password = $('#password').val();
+    let address = $('#address').val();
+    let select_gender = $('#select_gender').val();
+    let dob = $('#dob').val();
+
+    let resume = document.getElementById("resume").files[0]
+    var data =  new FormData();
+    data.append("name", name)
+    data.append("email", email)
+    data.append("number", number)
+    data.append("work_status", work_status)
+    data.append("password", password)
+    data.append("address", address)
+    data.append("gender", select_gender)
+    data.append("dob", dob)
+
+    data.append("resume", resume)  
+    $.ajax({
+        type: "POST",
+        url: "/signupAjax/",
+        headers: { 'X-CSRFToken': csrftoken },
+        dataType:"json",
+        processData:false,
+        contentType:false,
+        data:data,
+   
+        success:function(res){
+            console.log(res.message);
+            console.log('success');
+            toastr.success(res.message);
+            setTimeout(()=>{
+                window.location.href= '/signupEmployementAjax/'+ res.slug;
+                },2000);
+
+        
+        },
+      error:function(res){
+        console.log(res)
+        toastr.error(res.responseJSON.message);
+
+      }
+});
+
+
+    
+
+
+
+ }
+  </script>
+  <script>
+    const toggleForm = () => {
+        const container = document.querySelector('.container');
+        container.classList.toggle('active');
+    };
+</script>
+  {% endblock script %}
+
+  {% endblock body %}
+  

@@ -1,0 +1,870 @@
+<!doctype html>
+{% extends 'call4jobemp/base/base.html'%}
+{% load static %}
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+<html class="no-js" lang="zxx">
+
+<style>
+    .jobs-crosall{
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 15px;
+    }
+</style>
+<body>
+    <!-- Preloader Start -->
+    {% comment %} <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/logo.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <!-- Preloader Start -->
+
+    <!--  header Start -->
+
+    {% comment %} {% include 'call4jobemp/base/header.html' %} {% endcomment %}
+    {% include 'call4jobemp/base/header.html' %}
+    <!-- header end -->
+
+    <main>
+
+        <!-- slider Area Start-->
+        <section class="text-gray-600 body-font pt-24">
+            <div class="container mx-auto flex px-5 py-24 lg:flex-row flex-col items-center">
+                <div
+                    class="lg:flex-grow lg:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                    <h1 class="title-font sm:text-5xl text-3xl mb-4 font-regular text-gray-900">We believe in<br> <span
+                            class="text-[#035E7B] text-7xl font-bold">Building careers</span><br>as well as
+                        <b>organizations</b>.
+                    </h1>
+                    <p class="mb-8 leading-relaxed">Looking for a reliable and efficient recruitment service that can
+                        help
+                        you find the most qualified candidates for your organization? <br> Look no further than our
+                        specially formulated recruiter service!</p>
+                    <div class="flex justify-center">
+                        <a href="/find-job/"><button
+                                class="inline-flex items-center hover:bg-[#035E7B] border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-[#035E7B] hover:text-white mt-4 md:mt-0 rounded-full font-semibold">Get
+                                Started</button></a>
+                    </div>
+                </div>
+                <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                    <img class="object-cover object-center rounded" alt="hero"
+                        src="{% static 'call4jobemp/assets/images/Hero-image.svg' %}">
+                </div>
+            </div>
+        </section>
+        <!-- //Hero Section... -->
+        <!-- counter section -->
+        <section class="text-white body-font bg-[#035E7B]/80">
+            <div class="container px-5 mx-auto">
+                <div class="flex flex-wrap -m-4 text-center">
+                    <div class="p-4 sm:w-1/4 w-1/2 flex-col justify-center items-center">
+                        <h2 class="title-font font-medium sm:text-4xl text-3xl text-white">5000+</h2>
+                        <p class="leading-relaxed">Total Jobs</p>
+                    </div>
+                    <div class="p-4 sm:w-1/4 w-1/2">
+                        <h2 class="title-font font-medium sm:text-4xl text-3xl text-white">451</h2>
+                        <p class="leading-relaxed">Employee hired</p>
+                    </div>
+                    <div class="p-4 sm:w-1/4 w-1/2">
+                        <h2 class="title-font font-medium sm:text-4xl text-3xl text-white">568</h2>
+                        <p class="leading-relaxed">Employee applied</p>
+                    </div>
+                    <div class="p-4 sm:w-1/4 w-1/2">
+                        <h2 class="title-font font-medium sm:text-4xl text-3xl text-white">2300+</h2>
+                        <p class="leading-relaxed">Total Placed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- //counter section... -->
+        <!-- Recent jobs section -->
+       
+<section class="text-white body-font bg-[#035E7B]/80 mt-5 jobs-crosall">
+
+    <div class="container mt-4">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for i in job %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="d-flex justify-content-center align-items-center p-4">
+                <div class="card bg-light p-4" style="width: 25rem;">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="w-8 h-8 mr-3 bg-purple-500 text-white rounded-circle">
+                      <img class="rounded-circle" src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}" alt="">
+                    </div>
+                    <h2 class="text-dark text-lg font-medium">{{i.user.company_name}}</h2>
+                  </div>
+                  <div>
+                    <h2 class="text-[#035E7B]text-xl font-semibold">{{i.job_title}}</h2>
+                    <div class="d-flex justify-content-between align-items-center pt-4">
+                      <div class="d-flex align-items-center">
+                        <img class="w-4 h-4 mr-2" src="{% static 'call4jobemp/assets/images/location-icon.png' %}" alt="">
+                        <p class="text-base">{{i.job_location|truncatechars:7}}</p>
+                      </div>
+                      <p class="text-base">{{i.minimum_annual_salary}}LPA - {{i.maximum_annual_salary}}LPA</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <a href="/job-description/{{i.slug}}" class="d-flex align-items-center text-[#035E7B] ">Know More
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                          <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                      </a>
+                      <p class="text-xs">7 hours ago</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon text-primary" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon text-primary" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          
+      
+        <div class="text-center mt-4 pb-4">
+          <a href="/find-job/"  class="btn inline-flex text-white hover:text-white  border-2 border-white py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">View More</a>
+        </div>
+      </div>
+    
+    </div>
+          
+</section>
+
+        <!-- <section class="text-gray-600 body-font">
+            <div class="px-5 py-24 mx-auto">
+                tere pass hun mai
+                <div class="carousel-card-container owl-carousel">
+                    {% for i in job %}
+                    <div class="carousel-item">
+
+                        <div class="w-full p-4 cursor-pointer flex justify-center">
+                            <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col w-[25em] hover:shadow-md">
+                                <div class="flex items-center mb-3">
+                                    <div
+                                        class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-purple-500 text-white flex-shrink-0">
+                                        <img class="rounded-full"
+                                            src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}" alt="">
+                                    </div>
+                                    <h2 class="text-gray-900 text-lg title-font font-medium">{{i.user.company_name}}
+                                    </h2>
+                                </div>
+                                <div class="flex-col">
+                                    <h2 class="text-[#035E7B] text-xl font-semibold">{{i.job_title}}</h2>
+                                    <div class=" flex justify-between ites-center pt-4">
+                                        <div class="flex items-center">
+                                            <img class="w-4 h-4 mr-2"
+                                                src="{% static 'call4jobemp/assets/images/location-icon.png' %}" alt="">
+                                            <p class="leading-relaxed text-base">{{i.job_location|truncatechars:7}}</p>
+                                        </div>
+                                        <p class="leading-relaxed text-base">{{i.minimum_annual_salary}}LPA -
+                                            {{i.maximum_annual_salary}}LPA</p>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <a href="/job-description/{{i.slug}}"
+                                            class="text-[#035E7B] inline-flex items-center">Know
+                                            More
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2"
+                                                viewBox="0 0 24 24">
+                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                        <p class="leading-relaxed text-xs">7 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+
+                <div class="flex justify-center pt-6">
+                    <a href="/find-job/">
+                        <button
+                            class="inline-flex text-[#035E7B] hover:text-white  border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">View
+                            More</button>
+                    </a>
+                </div>
+            </div>
+        </section> -->
+        <!-- //Recent jobs section...  -->
+        <!-- Recent hiring section -->
+        <section class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="flex flex-col text-center w-full mb-20">
+                    <h2 class="text-md text-[#035E7B] tracking-widest font-medium title-font mb-1 uppercase">active
+                        companies</h2>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Top companies hiring now</h1>
+                </div>
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-8 mx-auto">
+                        <div class="flex flex-wrap -m-2">
+                            {% for i in job %}
+                            <div class="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer">
+                                <div
+                                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
+                                    <img alt="team"
+                                        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                                        src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 title-font font-medium">{{i.user.company_name}}</h2>
+                                        <p class="text-gray-500">{{i.job_title}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% comment %} <div class="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer">
+                                <div
+                                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
+                                    <img alt="team"
+                                        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                                        src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 title-font font-medium">Reliance Industries (RIL)</h2>
+                                        <p class="text-gray-500">DevOps</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer">
+                                <div
+                                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
+                                    <img alt="team"
+                                        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                                        src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 title-font font-medium">Reliance Industries (RIL)</h2>
+                                        <p class="text-gray-500">Software Engineer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer">
+                                <div
+                                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg hover:shadow-md">
+                                    <img alt="team"
+                                        class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                                        src="{% static 'call4jobemp/assets/images/seeksave logo.png' %}">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 title-font font-medium">Reliance Industries (RIL)</h2>
+                                        <p class="text-gray-500">UX Researcher</p>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </section>
+                <div class="flex justify-center pt-6">
+                    <button
+                        class="inline-flex text-[#035E7B] hover:text-white border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">View
+                        More</button>
+                </div>
+            </div>
+        </section>
+        <!-- //Recent hiring section...  -->
+        <!-- What makes Call 4 Hire unique? section -->
+        <section class="bg-[#035E7B]/20">
+            <section class="text-gray-600 body-font">
+                <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 140" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                            <stop stop-color="rgba(255, 255, 255, 1)" offset="0%"></stop>
+                            <stop stop-color="rgba(255, 255, 255, 1)" offset="100%"></stop>
+                        </linearGradient>
+                    </defs>
+                    <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+                        d="M0,0L60,0C120,0,240,0,360,21C480,42,600,84,720,91C840,98,960,70,1080,67.7C1200,65,1320,89,1440,102.7C1560,117,1680,121,1800,116.7C1920,112,2040,98,2160,88.7C2280,79,2400,75,2520,72.3C2640,70,2760,70,2880,63C3000,56,3120,42,3240,35C3360,28,3480,28,3600,25.7C3720,23,3840,19,3960,18.7C4080,19,4200,23,4320,21C4440,19,4560,9,4680,21C4800,33,4920,65,5040,65.3C5160,65,5280,33,5400,18.7C5520,5,5640,9,5760,11.7C5880,14,6000,14,6120,11.7C6240,9,6360,5,6480,16.3C6600,28,6720,56,6840,74.7C6960,93,7080,103,7200,91C7320,79,7440,47,7560,39.7C7680,33,7800,51,7920,67.7C8040,84,8160,98,8280,91C8400,84,8520,56,8580,42L8640,28L8640,140L8580,140C8520,140,8400,140,8280,140C8160,140,8040,140,7920,140C7800,140,7680,140,7560,140C7440,140,7320,140,7200,140C7080,140,6960,140,6840,140C6720,140,6600,140,6480,140C6360,140,6240,140,6120,140C6000,140,5880,140,5760,140C5640,140,5520,140,5400,140C5280,140,5160,140,5040,140C4920,140,4800,140,4680,140C4560,140,4440,140,4320,140C4200,140,4080,140,3960,140C3840,140,3720,140,3600,140C3480,140,3360,140,3240,140C3120,140,3000,140,2880,140C2760,140,2640,140,2520,140C2400,140,2280,140,2160,140C2040,140,1920,140,1800,140C1680,140,1560,140,1440,140C1320,140,1200,140,1080,140C960,140,840,140,720,140C600,140,480,140,360,140C240,140,120,140,60,140L0,140Z">
+                    </path>
+                </svg>
+                <div class="container px-5 mx-auto flex items-center md:flex-row flex-col">
+                    <div class="flex flex-col md:pr-10 pr-0 w-full md:w-auto text-left">
+                        <h1 class="md:text-4xl text-2xl font-medium title-font text-gray-900">What makes <br><span
+                                class="text-[#035E7B] md:text-6xl text-4xl">Call 4 Hire unique?</span></h1>
+                    </div>
+                </div>
+            </section>
+            <section class="text-gray-600 body-font">
+                <div class="container mx-auto flex px-5 md:py-8 py-24 md:flex-row flex-col items-center">
+                    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+                        <img class="object-cover object-center rounded" alt="hero"
+                            src=" {% static 'call4jobemp/assets/images/unique-section-image.svg' %}">
+                    </div>
+                    <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col items-start text-left">
+                        <li class="leading-10">We match your specific talent needs with local talent.</li>
+                        <li class="leading-10">Offer targeted marketing strategies that provide qualified candidates
+                            with
+                            the
+                            best opportunities.</li>
+                        <li class="leading-10">Prepare detailed job listings that are tailored to your industry and
+                            location.
+                        </li>
+                        <li class="leading-10">Proactively help candidates apply for open positions and check their
+                            credentials.
+                        </li>
+                        <li class="leading-10">Provide pre-screening tools for your CVs and applications.</li>
+                        <li class="leading-10">Finalize interviews and provide quality feedback to applicants.</li>
+                        <div class="flex justify-center pt-6">
+                            <button
+                                class="inline-flex text-[#035E7B] hover:text-white border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">post
+                                a job</button>
+                        </div>
+                    </div>
+                </div>
+                <svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 140" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                            <stop stop-color="rgba(255, 255, 255, 1)" offset="0%"></stop>
+                            <stop stop-color="rgba(255, 255, 255, 1)" offset="100%"></stop>
+                        </linearGradient>
+                    </defs>
+                    <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+                        d="M0,0L60,0C120,0,240,0,360,21C480,42,600,84,720,91C840,98,960,70,1080,67.7C1200,65,1320,89,1440,102.7C1560,117,1680,121,1800,116.7C1920,112,2040,98,2160,88.7C2280,79,2400,75,2520,72.3C2640,70,2760,70,2880,63C3000,56,3120,42,3240,35C3360,28,3480,28,3600,25.7C3720,23,3840,19,3960,18.7C4080,19,4200,23,4320,21C4440,19,4560,9,4680,21C4800,33,4920,65,5040,65.3C5160,65,5280,33,5400,18.7C5520,5,5640,9,5760,11.7C5880,14,6000,14,6120,11.7C6240,9,6360,5,6480,16.3C6600,28,6720,56,6840,74.7C6960,93,7080,103,7200,91C7320,79,7440,47,7560,39.7C7680,33,7800,51,7920,67.7C8040,84,8160,98,8280,91C8400,84,8520,56,8580,42L8640,28L8640,140L8580,140C8520,140,8400,140,8280,140C8160,140,8040,140,7920,140C7800,140,7680,140,7560,140C7440,140,7320,140,7200,140C7080,140,6960,140,6840,140C6720,140,6600,140,6480,140C6360,140,6240,140,6120,140C6000,140,5880,140,5760,140C5640,140,5520,140,5400,140C5280,140,5160,140,5040,140C4920,140,4800,140,4680,140C4560,140,4440,140,4320,140C4200,140,4080,140,3960,140C3840,140,3720,140,3600,140C3480,140,3360,140,3240,140C3120,140,3000,140,2880,140C2760,140,2640,140,2520,140C2400,140,2280,140,2160,140C2040,140,1920,140,1800,140C1680,140,1560,140,1440,140C1320,140,1200,140,1080,140C960,140,840,140,720,140C600,140,480,140,360,140C240,140,120,140,60,140L0,140Z">
+                    </path>
+                </svg>
+            </section>
+        </section>
+        <!-- //What makes Call 4 Hire unique? section... -->
+        <!-- blog section -->
+        {% comment %} <section class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="flex flex-col justify-center text-center w-full mb-20">
+                    <h2 class="text-md text-[#035E7B] tracking-widest font-medium title-font mb-1 uppercase">OUR LATEST
+                        BLOG
+                    </h2>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 uppercase">Our recent news</h1>
+                </div>
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-4 mx-auto">
+                        <div class="flex flex-wrap -m-4">
+                            {% for i in blog %}
+                            <div class="p-4 md:w-1/3">
+                                <a href="./blog details.html">
+                                    <div
+                                        class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:shadow-xl cursor-pointer">
+                                        <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                                            src="{{i.image.url}}" alt="blog">
+                                        <div class="p-6">
+                                            <h2
+                                                class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                                {{i.category.title}}</h2>
+                                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{i.title}}
+                                            </h1>
+                                            <p class="leading-relaxed mb-3">{{i.description|safe|truncatechars:200}}.
+                                            </p>
+                                            <div class="flex items-center flex-wrap ">
+                                                <a href="/blog-details/{{i.slug}}"
+                                                    class="text-[#035E7B] cursor-pointer active:animate-ping inline-flex items-center md:mb-2 lg:mb-0">Learn
+                                                    More
+                                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
+                                                        stroke-width="2" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path d="M5 12h14"></path>
+                                                        <path d="M12 5l7 7-7 7"></path>
+                                                    </svg>
+                                                </a>
+                                                <span
+                                                    class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                    </svg>1.2K
+                                                </span>
+                                                <span
+                                                    class="text-gray-400 inline-flex items-center leading-none text-sm">
+                                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                        viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                                        </path>
+                                                    </svg>6
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                <div class="flex justify-center pt-6">
+                    <button
+                        class="inline-flex text-[#035E7B] hover:text-white bg-transparent border-2 border-[#035E7B] py-2 px-6 focus:outline-none hover:bg-[#035E7B] rounded text-md uppercase font-semibold rounded-full">View
+                        More</button>
+                </div>
+            </div>
+        </section> {% endcomment %}
+        {% comment %} <div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider slider-height d-flex align-items-center"
+                    data-background="{{cms_page.0.image1.url}}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-9 col-md-10">
+                                <div class="hero__caption">
+                                    <h1>{{cms_page.0.heading1}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search Box -->
+                        <div class="row">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- slider Area End-->
+        <!-- Our Services Start -->
+        {% comment %} <div class="our-services section-pad-t30">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <span>FEATURED TOURS Packages</span>
+                            <h2>Browse Top Categories </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-contnet-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-tour"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Design & Creative</a></h5>
+                                <span>(653)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-cms"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Design & Development</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-report"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Sales & Marketing</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-app"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Mobile Application</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-helmet"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Construction</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-high-tech"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Information Technology</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-real-estate"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Real Estate</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-content"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html">Content Writer</a></h5>
+                                <span>(658)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- More Btn -->
+                <!-- Section Button -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="browse-btn2 text-center mt-50">
+                            <a href="job_listing.html" class="border-btn2">Browse All Sectors</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Our Services End -->
+        <!-- Online CV Area Start -->
+        {% comment %} <div class="online-cv cv-bg section-overly pt-90 pb-120"
+            data-background="{% static 'call4jobemp/assets/img/gallery/cv_bg.jpg' %}">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <div class="cv-caption text-center">
+                            <p class="pera1">FEATURED TOURS Packages</p>
+                            <p class="pera2"> Make a Difference with Your Online Resume!</p>
+                            <a href="#" class="border-btn2 border-btn4">Upload your cv</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Online CV Area End-->
+        <!-- Featured_job_start -->
+        {% comment %} <section class="featured-job-area feature-padding">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <span>Recent Job</span>
+                            <h2>Find Your Jobs</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <!-- single-job-content -->
+                        {% for i in job %}
+                        <div class="single-job-items mb-30">
+                            <div class="job-items">
+                                <div class="company-img">
+                                    <a href="/jobDescription/{{i.slug}}"><img
+                                            src="{% static 'call4jobemp/assets/img/icon/job-list1.png' %}" alt=""></a>
+                                </div>
+                                <div class="job-tittle">
+                                    <a href="/jobDescription/{{i.slug}}">
+                                        <h4>{{i.job_title}}</h4>
+                                    </a>
+                                    <ul>
+                                        <li>{{i.user.company_name}}</li>
+                                        <li><i class="fas fa-map-marker-alt"></i>{{i.job_location}}</li>
+                                        <li>{{i.minimum_annual_salary}}LPA - {{i.maximum_annual_salary}}LPA</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="items-link f-right">
+                                <a href="/jobDescription/{{i.slug}}">{{i.job_types}}</a>
+                                <span>7 hours ago</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- single-job-content -->
+
+                    </div>
+                </div>
+            </div>
+        </section> {% endcomment %}
+        <!-- Featured_job_end -->
+        <!-- How  Apply Process Start-->
+        {% comment %} <div class="apply-process-area apply-bg pt-150 pb-150"
+            data-background="{% static 'call4jobemp/assets/img/gallery/how-applybg.png' %}">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle white-text text-center">
+                            <span>Apply process</span>
+                            <h2> How it works</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Apply Process Caption -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-search"></span>
+                            </div>
+                            <div class="process-cap">
+                                <h5>1. Search a job</h5>
+                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut
+                                    laborea.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-curriculum-vitae"></span>
+                            </div>
+                            <div class="process-cap">
+                                <h5>2. Apply for job</h5>
+                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut
+                                    laborea.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-process text-center mb-30">
+                            <div class="process-ion">
+                                <span class="flaticon-tour"></span>
+                            </div>
+                            <div class="process-cap">
+                                <h5>3. Get your job</h5>
+                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut
+                                    laborea.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- How  Apply Process End-->
+        <!-- Testimonial Start -->
+        {% comment %} <div class="testimonial-area testimonial-padding">
+            <div class="container">
+                <!-- Testimonial contents -->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-8 col-lg-8 col-md-10">
+                        <div class="h1-testimonial-active dot-style">
+                            <!-- Single Testimonial -->
+                            <div class="single-testimonial text-center">
+                                <!-- Testimonial Content -->
+                                <div class="testimonial-caption ">
+                                    <!-- founder -->
+                                    <div class="testimonial-founder  ">
+                                        <div class="founder-img mb-30">
+                                            <img src="{% static 'call4jobemp/assets/img/testmonial/testimonial-founder.png' %}"
+                                                alt="">
+                                            <span>Margaret Lawson</span>
+                                            <p>Creative Director</p>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial-top-cap">
+                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our
+                                            responsibility! So start caring for your body and it will care for you. Eat
+                                            clean it will care for you and workout hard.”</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Testimonial -->
+                            <div class="single-testimonial text-center">
+                                <!-- Testimonial Content -->
+                                <div class="testimonial-caption ">
+                                    <!-- founder -->
+                                    <div class="testimonial-founder  ">
+                                        <div class="founder-img mb-30">
+                                            <img src="assets/img/testmonial/testimonial-founder.png" alt="">
+                                            <span>Margaret Lawson</span>
+                                            <p>Creative Director</p>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial-top-cap">
+                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our
+                                            responsibility! So start caring for your body and it will care for you. Eat
+                                            clean it will care for you and workout hard.”</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Testimonial -->
+                            <div class="single-testimonial text-center">
+                                <!-- Testimonial Content -->
+                                <div class="testimonial-caption ">
+                                    <!-- founder -->
+                                    <div class="testimonial-founder  ">
+                                        <div class="founder-img mb-30">
+                                            <img src="assets/img/testmonial/testimonial-founder.png" alt="">
+                                            <span>Margaret Lawson</span>
+                                            <p>Creative Director</p>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial-top-cap">
+                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our
+                                            responsibility! So start caring for your body and it will care for you. Eat
+                                            clean it will care for you and workout hard.”</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Testimonial End -->
+        <!-- Support Company Start-->
+        {% comment %} <div class="support-company-area support-padding fix">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="right-caption">
+                            <!-- Section Tittle -->
+                            <div class="section-tittle section-tittle2">
+                                <span>{{cms_page.0.heading2}}</span>
+                                <h2>{{cms_page.0.heading3}}</h2>
+                            </div>
+                            <div class="support-caption">
+                                <p class="pera-top">{{cms_page.0.paragraph1|safe}}.</p>
+                                <p>{{cms_page.0.paragraph2|safe}}.</p>
+                                <a href="about.html" class="btn post-btn">Post a job</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="support-location-img">
+                            <img src="{{cms_page.0.image2.url}}" alt="">
+                            <div class="support-img-cap text-center">
+                                <p>Since</p>
+                                <span>1994</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Support Company End-->
+        <!-- Blog Area Start -->
+        {% comment %} <div class="home-blog-area blog-h-padding">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <span>Our latest blog</span>
+                            <h2>Our recent news</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for i in blog %}
+                    <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="home-blog-single mb-30">
+                            <div class="blog-img-cap">
+                                <div class="blog-img">
+                                    <img src="{{i.image.url}}" alt="">
+                                    <!-- Blog date -->
+                                    <div class="blog-date text-center">
+                                        <span>{{i.created_at}}</span>
+                                        {% comment %} <p>Now</p> {% endcomment %}
+                                        {% comment %}
+                                    </div>
+                                </div>
+                                <div class="blog-cap">
+                                    <p>| {{i.category.title}}</p>
+                                    <h3><a href="/blog-details/{{i.slug}}">{{i.title}}</a></h3>
+                                    <a href="/blog-details/{{i.slug}}" class="more-btn">Read more »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Blog Area End -->
+
+    </main>
+    <!--  footer Start -->
+
+    {% include 'call4jobemp/base/footer.html' %}
+    <!--  footer end -->
+
+    <!-- JS here -->
+
+    <!-- All JS Custom Plugins Link Here here -->
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const carousel = document.getElementById("myCarousel");
+          const carouselItems = carousel.querySelectorAll(".carousel-item");
+          const totalItems = carouselItems.length;
+          const itemsPerSlide = 2;
+          let currentIndex = 0;
+      
+          function showSlides() {
+            for (let i = 0; i < totalItems; i++) {
+              if (i >= currentIndex && i < currentIndex + itemsPerSlide) {
+                carouselItems[i].classList.add("active");
+              } else {
+                carouselItems[i].classList.remove("active");
+              }
+            }
+          }
+      
+          function slideNext() {
+            currentIndex += itemsPerSlide;
+            if (currentIndex >= totalItems) {
+              currentIndex = 0;
+            }
+            showSlides();
+          }
+      
+          function slidePrev() {
+            currentIndex -= itemsPerSlide;
+            if (currentIndex < 0) {
+              currentIndex = totalItems - itemsPerSlide;
+            }
+            showSlides();
+          }
+      
+          // Attach event listeners to the carousel control buttons
+          carousel.querySelector(".carousel-control-next").addEventListener("click", slideNext);
+          carousel.querySelector(".carousel-control-prev").addEventListener("click", slidePrev);
+      
+          // Show initial slides
+          showSlides();
+        });
+      </script> -->
+      
+</body>
+
+</html>
+
+{% endblock body %}

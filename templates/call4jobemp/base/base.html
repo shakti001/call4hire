@@ -1,0 +1,274 @@
+{% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call4hire</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'call4jobemp//assets/images/Favicon.ico' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'call4jobemp/assets/Js/common.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+    <!-- {% comment %} <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script> {% endcomment %} -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="{% static 'call4jobemp/assets/Css/common.css'%}">
+     <link rel="stylesheet" href="{% static 'call4jobemp/assets/Css/custom.css'%}">
+    <link rel="stylesheet" href="{% static 'call4jobemp/assets/Css/index.css'%}">
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
+    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css"
+        rel="stylesheet">
+    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+        .toast-error{
+            background-color:red;
+            padding-bottom: 3px;
+            margin:0px 8px;
+            font-weight:300;
+        }
+        .toast-success{
+            background-color:green;
+            padding-bottom: 3px;
+            margin:0px 8px;
+            font-weight:300;
+        }
+    </style>
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+   
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>  
+    <script src="{% static 'call4jobemp/assets/Js/common.js' %}"></script>
+
+{%  block body %}
+
+{% endblock body %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success'%}
+            
+            <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% elif message.tags == 'info' %}
+            <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% elif message.tags == 'warning' %}
+            <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% elif message.tags == 'error' %}
+            <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+
+    <!-- //modal section... -->
+
+
+
+    <script>
+        $(document).ready(function () {
+            $(".carousel-card-container").owlCarousel({
+                loop: true,
+                // margin: 10,
+                // nav: true,
+                // navText: [
+                //   "<i class='fa fa-caret-left'></i>",
+                //   "<i class='fa fa-caret-right'></i>"
+                // ],
+                autoplay: true,
+                autoplayHoverPause: true,
+                dots: false,
+                nav: false,
+                smartSpeed: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    800:
+                    {
+                        items: 3
+                    },
+                    1300: {
+                        items: 4
+                    }
+                }
+            });
+        });
+        $(".search_icon").click(function () {
+                $(this).css({
+                    "color": "transparent"
+                });
+                $(".search_bar").show();
+            });
+            $(".cross_icon").click(function () {
+                $(".search_bar").hide();
+                $(".search_icon").css({
+                    "color": "#035E7B"
+                });
+            });    
+
+    </script>
+    <script>
+      
+        // location dropdown section
+        var x, i, j, l, ll, selElmnt, a, b, c;
+        /*look for any elements with the class "custom-select":*/
+        x = document.getElementsByClassName("custom-select");
+        l = x.length;
+        for (i = 0; i < l; i++) {
+          selElmnt = x[i].getElementsByTagName("select")[0];
+          ll = selElmnt.length;
+          /*for each element, create a new DIV that will act as the selected item:*/
+          a = document.createElement("DIV");
+          a.setAttribute("class", "select-selected");
+          a.setAttribute("id", "location")
+
+          a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+          x[i].appendChild(a);
+          /*for each element, create a new DIV that will contain the option list:*/
+          b = document.createElement("DIV");
+          b.setAttribute("class", "select-items select-hide");
+          for (j = 1; j < ll; j++) {
+            /*for each option in the original select element,
+            create a new DIV that will act as an option item:*/
+            c = document.createElement("DIV");
+            c.innerHTML = selElmnt.options[j].innerHTML;
+            c.addEventListener("click", function(e) {
+                /*when an item is clicked, update the original select box,
+                and the selected item:*/
+                var y, i, k, s, h, sl, yl;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                sl = s.length;
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < sl; i++) {
+                  if (s.options[i].innerHTML == this.innerHTML) {
+                    s.selectedIndex = i;
+                    h.innerHTML = this.innerHTML;
+                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    yl = y.length;
+                    for (k = 0; k < yl; k++) {
+                      y[k].removeAttribute("class");
+                    }
+                    this.setAttribute("class", "same-as-selected");
+                    break;
+                  }
+                }
+                h.click();
+            });
+            b.appendChild(c);
+          }
+          x[i].appendChild(b);
+          a.addEventListener("click", function(e) {
+              /*when the select box is clicked, close any other select boxes,
+              and open/close the current select box:*/
+              e.stopPropagation();
+              closeAllSelect(this);
+              this.nextSibling.classList.toggle("select-hide");
+              this.classList.toggle("select-arrow-active");
+              
+
+            });
+            
+        }
+        function closeAllSelect(elmnt) {
+          /*a function that will close all select boxes in the document,
+          except the current select box:*/
+          var x, y, i, xl, yl, arrNo = [];
+          x = document.getElementsByClassName("select-items");
+          y = document.getElementsByClassName("select-selected");
+          xl = x.length;
+          yl = y.length;
+          for (i = 0; i < yl; i++) {
+            if (elmnt == y[i]) {
+              arrNo.push(i)
+            } else {
+              y[i].classList.remove("select-arrow-active");
+            }
+          }
+          for (i = 0; i < xl; i++) {
+            if (arrNo.indexOf(i)) {
+              x[i].classList.add("select-hide");
+            }
+          }
+        }
+        /*if the user clicks anywhere outside the select box,
+        then close all select boxes:*/
+        document.addEventListener("click", closeAllSelect);
+        //location dropdown section...
+        
+    </script>
+    
+        <script>
+            $(document).ready(function () {
+                $(".carousel-card-container").owlCarousel({
+                    loop: true,
+                    // margin: 10,
+                    // nav: true,
+                    // navText: [
+                    //   "<i class='fa fa-caret-left'></i>",
+                    //   "<i class='fa fa-caret-right'></i>"
+                    // ],
+                    autoplay: true,
+                    autoplayHoverPause: true,
+                    dots: false,
+                    nav: false,
+                    smartSpeed: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        800:
+                        {
+                            items: 3
+                        },
+                        1300: {
+                            items: 4
+                        }
+                    }
+                });
+            });
+            $(".search_icon").click(function () {
+                    $(this).css({
+                        "color": "transparent"
+                    });
+                    $(".search_bar").show();
+                });
+                $(".cross_icon").click(function () {
+                    $(".search_bar").hide();
+                    $(".search_icon").css({
+                        "color": "#035E7B"
+                    });
+                });    
+        
+        </script>
+        <script>
+            function toggleSidebar() {
+                $("#default-sidebar").css("display", "block")
+            }
+            function Close() {
+                $("#default-sidebar").css("display", "none")
+        
+            }
+        </script>
+{% comment %} .form-check.i-accept #Term-Condition-error{position: absolute;top:25px;left: 30px;} {% endcomment %}
