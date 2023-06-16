@@ -21,6 +21,12 @@ urlpatterns = [
     path('edit-profile/<slug>', views.edit_profile, name="edit_profile"),
     path('change-password/<slug>', views.change_password),
     path('set-google-user-type/', views.save_google_type_user),
+    path('category/', views.jobCategory),
+    path('add-category/', views.add_category),
+    path('edit-category/<slug>', views.edit_category),
+    
+    
+    
     
     
     

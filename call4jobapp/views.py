@@ -205,6 +205,111 @@ def change_password(request, slug):
 
 
 
+def jobCategory(request):
+    job = JobCategoryCompany.objects.filter(user_id = request.user.id)
+    return render(request, "call4job/jobs/job-category/jobcategory.html",{"job":job})
+
+
+
+# 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
+
+def add_category(request):
+    if request.method=="POST":
+        user_id = request.POST.get("user_id")
+        print(user_id,"user_id")
+        
+        
+        count = request.POST.get("count")
+        print(count,"aaaaaaaa")
+        category_name = request.POST.get("category_name")
+        print(category_name,"aaaaaaaa")
+        
+        if user_id and category_name:
+            data = JobCategoryCompany.objects.create(user_id = user_id, name=category_name)
+            data.save()
+       
+            
+            
+        if count:
+            c = int(count)
+            for i in range(c):
+                category_option = request.POST.get(f"category_option_{i}")
+                option_data = JobCategoryOptionCompany.objects.create(name=category_option, job_category_id = data.id)
+                option_data.save()
+            messages.success(request, "CXategory & option create successfully  !!!!")
+            return redirect("/company/category/")
+                
+        else:
+            messages.error(request, "Please fill category name  !!!!")
+            return redirect("/company/add-category/")
+            
+        
+       
+    return render(request, "call4job/jobs/job-category/add_category.html")
+
+
+def edit_category(request,slug):
+    category = JobCategoryCompany.objects.get(slug=slug)
+    categoryOption = JobCategoryOptionCompany.objects.filter(job_category_id=category.id)
+    
+    if request.method=="POST":
+        user_id = request.POST.get("user_id")
+        print(user_id,"user_id")
+        
+        count = request.POST.get("count")
+        print(count,"count")
+        
+        category_name = request.POST.get("category_name")
+        print(category_name,"category_name")
+        if user_id and category_name:
+           category.name = category_name
+           category.save()
+        if count:
+            option_data = JobCategoryOptionCompany.objects.filter(job_category_id = category.id)
+            option_data.delete()
+            c = int(count)
+            for i in range(c):
+                print(i,"iiiiiiiiiiiiiiiii")
+                category_option = request.POST.get(f"category_option_{i}")
+                
+                
+                option_data = JobCategoryOptionCompany.objects.create(name=category_option, job_category_id = category.id)
+                option_data.save()
+            messages.success(request, "Category & option Update successfully  !!!!")
+            return redirect("/company/category/")
+                
+        else:
+            messages.error(request, "Please fill category name  !!!!")
+            return redirect("/company/add-category/")
+            
+        
+    categoryOption_count = JobCategoryOptionCompany.objects.filter(job_category_id=category.id).count()
+    
+    return render(request, "call4job/jobs/job-category/edit_category.html",{'category':category,'categoryOption':categoryOption,'range_categoryOption_count':range(categoryOption_count),'categoryOption_count':categoryOption_count})
+
+
+
+# def edit_category(request, slug):
+#     category = JobCategory.objects.get(slug=slug)
+#     if request.method=="POST":
+#         category_name = request.POST.get("category_name")
+#         if category_name:
+#             category.name = category_name
+#             category.save()
+#             messages.success(request, "Job edited successfully !!!!")
+#             return redirect("/admin/job-category/")
+#         else:
+#             messages.error(request, "Please fill job name !!!!")
+#             return redirect("/admin/edit-category/" + str(slug))
+#     return render(request, "admin/jobs/job-category/edit_category.html",{'category':category})
+ 
+# def delete_category(request, slug):
+#     job = JobCategory.objects.get(slug=slug)
+#     job.delete()
+#     messages.success(request, "Job  deleted successfully !!!")
+#     return redirect('/admin/job-category')
+
+
 @login_required(login_url="/company/")
 def joblist(request):
     job = JobPost.objects.filter(user_id= request.user.id)

@@ -22,6 +22,8 @@ class JobCategory(models.Model):
         permissions = (
             ("sidebar_jobcategory", "Can sidebar jobcategory"),) 
         
+
+        
 class User(AbstractUser):
     job_category = models.ForeignKey(JobCategory, on_delete=models.CASCADE,related_name="jobcat" , null=True, blank=True)
     
@@ -90,7 +92,37 @@ class User(AbstractUser):
     class Meta:
         permissions = (
             ("sidebar_user", "Can sidebar user"),)
-  
+
+
+
+class JobCategoryCompany(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="jobcategorycompany")
+    
+    name = models.CharField(max_length=100, null=False)
+    slug = models.CharField(max_length=50, unique=True, default=uuid.uuid4)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        permissions = (
+            ("sidebar_jobcategory", "Can sidebar jobcategory"),) 
+
+class JobCategoryOptionCompany(models.Model):
+    job_category = models.ForeignKey(JobCategoryCompany, on_delete=models.CASCADE, related_name="jobcategorycompanyoption")
+    
+    name = models.CharField(max_length=100, null=False)
+    slug = models.CharField(max_length=50, unique=True, default=uuid.uuid4)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        permissions = (
+            ("sidebar_jobcategoryoption", "Can sidebar jobcategoryoption"),) 
+
+
+
+
+
+
+ 
 class JobPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="jobpost")
     job_category = models.ForeignKey(JobCategory, on_delete=models.CASCADE,related_name="jobcategory" , null=True, blank=True)
