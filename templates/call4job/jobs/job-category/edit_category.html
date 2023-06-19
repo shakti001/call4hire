@@ -611,11 +611,11 @@
 									 		<div class="col-xl-12" id="optionrow_0">
 												<div class="row train"  id="training_div_0" >
                                                		<div class="mb-3 row" id="div_section_0">
-														<label class="col-lg-4 col-form-label" for="validationCustom01">Category {{forloop.counter}} ,{{i}}
+														<label class="col-lg-4 col-form-label" for="validationCustom01">Category {{forloop.counter0}} ,{{i}}
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-lg-6">
-															<input data-rule-required="true"  value="{{i.name}}" name="category_option_{{forloop.counter}}" id="category_option_{{forloop.counter}}" type="text" class="form-control" placeholder="Enter a Category Option.." required>
+															<input data-rule-required="true"  value="{{i.name}}" name="category_option_{{forloop.counter0}}" id="category_option_{{forloop.counter0}}" type="text" class="form-control" placeholder="Enter a Category Option.." required>
 															<div class="invalid-feedback">
 																Please enter a Job Category option.
 															</div>
@@ -626,7 +626,7 @@
 																
 															{% else %} 
 
-															<button style="padding:8px 12px" id="remove_{{forloop.counter}}" onclick="remove(this,{{forloop.counter}})" type="button"  class="btn btn-danger">Remove</button>
+															<button style="padding:8px 12px" id="remove_{{forloop.counter0}}" onclick="remove(this,{{forloop.counter0}})" type="button"  class="btn btn-danger">Remove</button>
 														
 															{% endif %}
 															

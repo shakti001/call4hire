@@ -586,7 +586,7 @@
                                                         <span class="text-danger">*</span>
                                                     </label>
                                                     <div class="col-lg-6">
-														<input  name="count"   id="count" type="text" class="form-control" id="validationCustom01">
+														<input  name="count" value="1"   id="count" type="text" class="form-control"  id="validationCustom01">
 
 														
 														<input  name="user_id" hidden value="{{request.user.id}}" id="user_id" type="text" class="form-control" id="validationCustom01">
@@ -611,7 +611,7 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-lg-6">
-															<input data-rule-required="true" name="category_option_0" id="category_option_0" type="text" class="form-control" placeholder="Enter a Category Option.." required>
+															<input data-rule-required="true" name="category_option_1" id="category_option_1" type="text" class="form-control" placeholder="Enter a Category Option.." required>
 															<div class="invalid-feedback">
 																Please enter a Job Category option.
 															</div>
@@ -681,10 +681,10 @@
     function sendMessage(){
         if(!$('#jobpost').valid()){
             return ;
+			
         } 
 		$("#optionrow_0").css("display", "block")
 		$("#generateoption").css("display", "none")
-
     }
     
     </script> 

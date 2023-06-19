@@ -209,12 +209,14 @@ def jobCategory(request):
     job = JobCategoryCompany.objects.filter(user_id = request.user.id)
     return render(request, "call4job/jobs/job-category/jobcategory.html",{"job":job})
 
+
+
+# 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
+
 def add_category(request):
     if request.method=="POST":
         user_id = request.POST.get("user_id")
-        print(user_id,"user_id")
-        
-        
+        print(user_id,"user_id")        
         count = request.POST.get("count")
         print(count,"aaaaaaaa")
         category_name = request.POST.get("category_name")
@@ -222,16 +224,16 @@ def add_category(request):
         
         if user_id and category_name:
             data = JobCategoryCompany.objects.create(user_id = user_id, name=category_name)
-            data.save()
-       
-            
-            
+            data.save()  
         if count:
             c = int(count)
-            for i in range(c):
+            i = 1
+            while 0 < c:
+                print(i,"addd iiiiiiii")
                 category_option = request.POST.get(f"category_option_{i}")
                 option_data = JobCategoryOptionCompany.objects.create(name=category_option, job_category_id = data.id)
                 option_data.save()
+                break
             messages.success(request, "CXategory & option create successfully  !!!!")
             return redirect("/company/category/")
                 
@@ -257,6 +259,7 @@ def edit_category(request,slug):
         
         category_name = request.POST.get("category_name")
         print(category_name,"category_name")
+        
         if user_id and category_name:
            category.name = category_name
            category.save()
@@ -264,13 +267,10 @@ def edit_category(request,slug):
             option_data = JobCategoryOptionCompany.objects.filter(job_category_id = category.id)
             option_data.delete()
             c = int(count)
-            for i in range(c):
-                print(i,"iiiiiiiiiiiiiiiii")
-                category_option = request.POST.get(f"category_option_{i}")
-                
-                
-                option_data = JobCategoryOptionCompany.objects.create(name=category_option, job_category_id = category.id)
-                option_data.save()
+            i = 1
+            for i in range(i, c):
+                    option_data = JobCategoryOptionCompany.objects.create(name=category_option, job_category_id = category.id)
+                    option_data.save()
             messages.success(request, "Category & option Update successfully  !!!!")
             return redirect("/company/category/")
                 

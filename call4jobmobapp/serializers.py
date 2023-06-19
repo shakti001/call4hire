@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 class RegitserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [ "email", "password", "roll", "username", "office_address", "employee_address", "country_code", "phone_number"]
+        fields = [ "email", "password","gender", "username", "office_address", "home_address", "country_code", "phone_number", "login_source", "fcm_token"]
         extra_kwargs = {"password": {"write_only": True}}
 
     # if 'roll' == 'homenowner':
