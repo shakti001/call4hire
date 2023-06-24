@@ -4,18 +4,45 @@ from call4jobapp.models import *
 from django.contrib.auth.hashers import make_password
 
 class RegitserSerializer(serializers.ModelSerializer):
+    
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    
+    gender = serializers.CharField()
+    
+    username = serializers.CharField()
+    
+    dob = serializers.DateTimeField()
+    
+    office_address = serializers.CharField()
+    
+    home_address = serializers.CharField()
+    
+    country_code = serializers.CharField()
+    
+    phone_number = serializers.CharField()
+    
+    login_source = serializers.CharField()
+    
+    
+
     class Meta:
         model = User
-        fields = [ "email", "password","gender", "username", "office_address", "home_address", "country_code", "phone_number", "login_source", "fcm_token"]
+        fields = [ "email", "password","gender", "username", "dob","office_address", "home_address", "country_code", "phone_number", "login_source"]
         extra_kwargs = {"password": {"write_only": True}}
 
-    # if 'roll' == 'homenowner':
-    #     def create(self, validated_data):
-    #         user = User(email = validated_data['email'], roll = validated_data['roll'], mobile_number = validated_data['mobile_number'], first_name=validated_data['first_name'], last_name=validated_data['last_name'], profile_pic=validated_data['profile_pic'])
-    #         user.set_password(validated_data['password'])
-    #         user.save()
-    #         return user
+
+
+class VerifyOTPSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    otp = serializers.CharField()
+
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
-
+    fcm_token = serializers.CharField()
+    login_source = serializers.CharField()
+    
+ 

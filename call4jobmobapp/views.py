@@ -11,21 +11,23 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from django.utils.datastructures import MultiValueDictKeyError
 import datetime
-# Create your views here.
+from django.contrib.auth.models import auth
+import json
+from call4jobapp.helpers import *
+from .session_middleware import *
+ # Create your views here.
+
 class RegisterUser(APIView):
     def post(self, request):
         try:
-            data = request.data
-            print(data["dob"])
-            
-            print(data["fcm_token"])
+            data= request.data
             if data:
-                serializer = RegitserSerializer(data=data,many=True)
+                serializer = RegitserSerializer(data=data)
                 if serializer:
                     if not User.objects.filter(email=data["email"].lower()).exists():
                         if not User.objects.filter(phone_number=data["phone_number"]).exists():
                             if serializer.is_valid(raise_exception=False):
-                                if data["login_source"] == '0':
+                                if data["login_source"] == 0:
                                     if not data["email"]:
                                         return JsonResponse({"status": False, "message": "Folowing field are required: email" })
                                     elif not data["username"]:
@@ -49,51 +51,118 @@ class RegisterUser(APIView):
                                         return JsonResponse({"status": False, "message": "Folowing field are required: password",})
                                     elif not data['gender']:
                                         return JsonResponse({"status": False, "message": "Folowing field are required: gender",})
-                                    elif not data['fcm_token']:
-                                        return JsonResponse({"status": False, "message": "Folowing field are required: Fcm token are missing",})
-                                    
                                     else:
-                                        user = User.objects.create(email=data["email"].lower(), roll="employee",
-                                        username = data["username"],
-                                        country_code = data["country_code"],
-                                        phone_number = data["phone_number"],
-                                        office_address = data["office_address"],
-                                        home_address = data["home_address"],
-                                        dob = data["dob"],
-                                        is_active = True,
-                                        fcm_token = data['fcm_token'],
-                                        password = make_password(data["password"])
-                                        )
-                                        if user:
-                                            token, created = Token.objects.get_or_create(user_id=user.id)
-                                            return JsonResponse({"status": True, "message": "Register Succesfully !!!!"})
-                                        else:
-                                            return JsonResponse({"status": False, "message": "Something is missing !!!!"})
+                                        otp = generateOTP()
+                                        subject = "One Time Password Has been sent."
+                                        message = f"Your One time Password is {otp}"
+                                        recipient = [data['email']]
+                                        sent_mail = sendMail(subject, message, recipient)
+                                        request.session['userdata'] = data
+                                        request.session['userOtp'] = otp
+                                        return JsonResponse({"status": True, "message": "Verification code sent on the mail address. Please check !!!!"})
                             else:
-                                return JsonResponse({"status": False, "message": "All fields required!"})  
+                                return JsonResponse({"status": False, "message": "data is not valid it's not in json format !"})  
                         else:
                             return JsonResponse({"status": False, "message": "Phone number allready exits !!!"})   
-                    else:
-                        return JsonResponse({"status": False, "message": "Email allready exits !!!"})    
                 else:
                     return JsonResponse({"status": False, "message": "Data format not support !!!"})    
             else:
                 return JsonResponse({"status": False, "message": "Something went wrong!"})        
-        
-        except MultiValueDictKeyError:
-            return JsonResponse({"status": False, "message": "Any data Key is missing "})
+        except MultiValueDictKeyError as e:
+                missing_key_name =e.args[0]                
+                return JsonResponse({"status":"False", "Your Missing key": f"{missing_key_name}"})        
+                
+
+
+class VerifyEmailOTP(APIView):
+    def post(self, request):
+        try:
+            data = request.data
+            if data:
+                serializer = VerifyOTPSerializer(data=data)
+                if serializer.is_valid():
+                    if data['email'] == request.session['userdata']['email']:
+                        print(request.session['userOtp'])
+                        if request.session['userOtp'] == data["otp"]:
+                            try:
+                                if  User.objects.get(email = request.session['userdata']['email'].lower()):
+                                    return Response(
+                                    {
+                                        "status": False,
+                                        "message": "User allready exits please try again later.",
+                                    }
+                                ) 
+                            except:
+                                user = User.objects.create(email=request.session['userdata']['email'].lower(), roll="employee",
+                                username = request.session['userdata']['username'],
+                                country_code = request.session['userdata']['country_code'],
+                                phone_number = request.session['userdata']['phone_number'],
+                                office_address = request.session['userdata']['office_address'],
+                                home_address = request.session['userdata']['home_address'],
+                                dob = request.session['userdata']['dob'],
+                                is_active = True,
+                                # fcm_token =request.session['userdata']['fcm_token'],
+                                password = make_password(request.session['userdata']['password']),
+                                email_verified = 1
+                                )
+                                token = Token.objects.get_or_create(user_id=user.id)
+                                return Response(
+                                    {
+                                        "status": True,
+                                        "token": str(token),
+                                        "message": "Email Verification is successfully completed Please login !!!!!",
+                                    }
+                                )
+                        else:
+                            return Response(
+                                {
+                                    "status": False,
+                                    "message": "OTP not match. Please try again.",
+                                }
+                            )
+                   
+                    else:
+                        return Response(
+                            {
+                                "status": False,
+                                "message": "Email id is not match with register email Please register again!",
+                            }
+                        )
+            else:
+                return Response(
+                    {
+                        "status": False,
+                        "message": "Please Input validate data!",
+                    }
+                )
+        except:
+            return Response(
+                {
+                    "status": False,
+                    "message": "Something went wrong!",
+                }
+            )
+
+
+
 
 class LoginUser(APIView):
     def post(self, request):
-        # try:
             data = request.data
             if data:
                 serializer = LoginSerializer(data=data)
                 if serializer.is_valid():
-                    if User.objects.filter(email=data["email"].lower()).exists():
+                    if User.objects.filter(email=data["email"].lower()).exists():                        
                         user = User.objects.get(email=data["email"].lower())
-                        if user:
-                            # user = 
+                        if user.check_password(data["password"]):
+                            if user.email_verified == False:
+                                return Response(
+                                    {
+                                        "status": True,
+                                        "is_verified": user.is_verified,
+                                        "message": "Your Email address is not verified yet.",
+                                    }
+                                )
                             if not user.is_active == True:
                                 return Response(
                                     {
@@ -109,21 +178,33 @@ class LoginUser(APIView):
                                     }
                                 )
                             else:
-                            #     user_view = UserViewSerializer(user)
-                            #     refresh = RefreshToken.for_user(user)
-                              
-                            #     auth.authenticate(
-                            #         email=data["email"].lower(), password=data["password"]
-                            #     )
-                            #     auth.login(request, user)
-                                return Response(
-                                    {
-                                        "status": True,
-                                        # "token": str(refresh.access_token),
-                                        # "payload": user_view.data,
-                                        "message": "Login Success.",
-                                    }
-                                )
+                                try:
+                                    user = User.objects.get(email = data["email"].lower() )                              
+                                    if user:
+                                        if data["login_source"] == 0:
+                                            user.fcm_token = data['fcm_token']
+                                            user.login_source = 0
+                                            user.save()
+                                            auth.authenticate(
+                                            email=data["email"].lower(), password=data["password"]
+                                            )
+                                            auth.login(request, user)
+                                            token = Token.objects.get_or_create(user_id=user.id)
+                                            return Response(
+                                                {
+                                                    "status": True,
+                                                    "token": str(token),
+                                                    "message": "Login Success.",
+                                                }
+                                            )
+                                except:
+                                    return Response(
+                                        {
+                                            "status": False,
+                                            "message": "Email not found",
+                                        }
+                                    )
+                                    
                         else:
                             return Response(
                                 {
@@ -152,10 +233,4 @@ class LoginUser(APIView):
                         "message": "Please Input validate data...",
                     }
                 )
-        # except:
-        #     return Response(
-        #         {
-        #             "status": False,
-        #             "message": "Something went wrong!",
-        #         }
-        #     ) 
+      

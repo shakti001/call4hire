@@ -24,11 +24,13 @@ urlpatterns = [
     path('category/', views.jobCategory),
     path('add-category/', views.add_category),
     path('edit-category/<slug>', views.edit_category),
+    path('apply-job-listing/', views.apply_job_listing
+)
     
     
     
     
-    
+        
     
     
     

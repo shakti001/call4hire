@@ -425,4 +425,9 @@ def save_google_type_user(request):
         return JsonResponse(({"status":"success"}))
     return JsonResponse({"status":"success", "message":"Doneeeee"})
     
-    
+
+def apply_job_listing(request):
+    # print(request.user,"aaaaaaaaaa")
+    data = ApplyJob.objects.filter( user_id = request.user.id)
+    # print(data,"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+    return render(request, "call4job/jobs/apply-job.html",{'data':data})
